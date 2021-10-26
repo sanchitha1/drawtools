@@ -13,6 +13,7 @@ const baseLayer = new ol.layer.Tile({
 // Layer Array
 const layer_array = [baseLayer]
 
+// Controls Attribute Collapse
 const mycontrols = new ol.control.defaults({
   attributionOptions:{
     collapsible:true
