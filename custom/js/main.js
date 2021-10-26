@@ -1,3 +1,33 @@
+// Custom Control
+class drawing_app extends ol.control.Control {
+  /**
+   * @param {Object} [opt_options] Control options.
+   */
+  constructor(opt_options) {
+    const options = opt_options || {};
+
+    const button = document.createElement('button');
+    button.innerHTML = 'N';
+
+    const element = document.createElement('div');
+    element.className = 'draw-tool ol-unselectable ol-control';
+    element.appendChild(button);
+
+    super({
+      element: element,
+      target: options.target,
+    });
+
+    button.addEventListener('click', this.start_stop_drawing.bind(this), false);
+  }
+
+  start_stop_drawing() {
+    // this.getMap().getView().setRotation(0);
+    alert('You clicked control');
+  }
+}
+
+
 // View
 const myview = new ol.View({
   projection: 'EPSG:4326',
