@@ -23,7 +23,7 @@ class drawing_app extends ol.control.Control {
 
   start_stop_drawing() {
     // this.getMap().getView().setRotation(0);
-    alert('You clicked control');
+    $('#start_draw_modal').modal('show');
   }
 }
 
