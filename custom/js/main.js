@@ -48,7 +48,7 @@ const mycontrols = new ol.control.defaults({
   attributionOptions:{
     collapsible:true
   }
-});
+}).extend([new drawing_app()]);
 // Map
 const map = new ol.Map({
   target: 'mymap',
