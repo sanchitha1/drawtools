@@ -7,7 +7,7 @@ class drawing_app extends ol.control.Control {
     const options = opt_options || {};
 
     const button = document.createElement('button');
-    button.innerHTML = 'N';
+    button.innerHTML = '<i class="fas fa-draw-polygon"></i>';
 
     const element = document.createElement('div');
     element.className = 'draw-tool ol-unselectable ol-control';
