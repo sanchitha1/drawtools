@@ -53,7 +53,7 @@ const draw_layer = new ol.layer.Vector({
 })
 
 // Layer Array
-const layer_array = [baseLayer]
+const layer_array = [baseLayer, draw_layer]
 
 // Controls Attribute Collapse
 const mycontrols = new ol.control.defaults({
