@@ -1,3 +1,6 @@
+// All global variables
+var draw;
+var flag_is_drawing_on = false;
 // Custom Control
 class drawing_app extends ol.control.Control {
   /**
@@ -41,7 +44,7 @@ const myview = new ol.View({
 
 // OSM Layer
 const baseLayer = new ol.layer.Tile({
-    source: new ol.source.OSM()
+  source: new ol.source.OSM()
 });
 
 // Draw vector layer
@@ -57,8 +60,8 @@ const layer_array = [baseLayer, draw_layer]
 
 // Controls Attribute Collapse
 const mycontrols = new ol.control.defaults({
-  attributionOptions:{
-    collapsible:true
+  attributionOptions: {
+    collapsible: true
   }
 }).extend([new drawing_app()]);
 // Map
