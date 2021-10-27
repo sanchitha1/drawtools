@@ -68,3 +68,14 @@ const map = new ol.Map({
   layers: layer_array,
   controls: mycontrols,
 });
+
+// Function to start drawing
+function start_draw(geom_type) {
+  draw = new ol.interaction.Draw({
+    type: geom_type,
+    source: draw_source
+  });
+  $('#start_draw_modal').modal('hide');
+  map.addInteraction(draw);
+  flag_is_drawing_on = true; // set to drawing mode is on inside the flag
+};
