@@ -40,6 +40,14 @@ const baseLayer = new ol.layer.Tile({
     source: new ol.source.OSM()
 });
 
+// Draw vector layer
+// 1. Define source
+const draw_source = new ol.source.Vector()
+// 2. Define layer
+const draw_layer = new ol.layer.Vector({
+  source: draw_source
+})
+
 // Layer Array
 const layer_array = [baseLayer]
 
