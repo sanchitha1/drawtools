@@ -1,4 +1,5 @@
 // All global variables
+var edit;
 var draw;
 var flag_is_drawing_on = false;
 // Custom Control
