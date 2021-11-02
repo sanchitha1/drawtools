@@ -11,13 +11,13 @@ class drawing_app extends ol.control.Control {
   constructor(opt_options) {
     const options = opt_options || {};
 
-    const button = document.createElement('button');
-    button.id = 'button_start'
-    button.innerHTML = '<i class="fas fa-draw-polygon"></i>';
+    const button = document.createElement('button'); // Creating button element
+    button.id = 'button_start' // Creating button id
+    button.innerHTML = '<i class="fas fa-draw-polygon"></i>'; // Creating button element
 
-    const element = document.createElement('div');
-    element.className = 'draw-tool ol-unselectable ol-control';
-    element.appendChild(button);
+    const element = document.createElement('div'); // Creating div element
+    element.className = 'draw-tool ol-unselectable ol-control'; // Creating element class
+    element.appendChild(button); // Appending button element as a child element inside the div
 
     super({
       element: element,
@@ -27,10 +27,10 @@ class drawing_app extends ol.control.Control {
     button.addEventListener('click', this.start_stop_drawing.bind(this), false);
   }
 
-  start_stop_drawing() {
-    if (flag_is_drawing_on == false) { // checking if the drawing mode is on
-      $('#start_draw_modal').modal('show'); // if not show modal
-    } else {
+  start_stop_drawing() { // Function when button is clicked
+    if (flag_is_drawing_on == false) { // checking if the drawing mode is off
+      $('#start_draw_modal').modal('show'); // Then show modal
+    } else { // If drawing mode is on
       map.removeInteraction(draw); // if drawing mode is on, then turn it off
       map.removeInteraction(edit); // if edit mode is on, then turn it off
       flag_is_drawing_on = false; // setting the drawing mode to initial status
@@ -93,6 +93,7 @@ function start_draw(geom_type) {
   flag_is_drawing_on = true; // set to drawing mode is on inside the flag
 };
 
+// Function Start Editing
 function start_edit() {
   edit = new ol.interaction.Modify({
     source: draw_source
