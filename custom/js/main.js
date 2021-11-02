@@ -86,5 +86,19 @@ function start_draw(geom_type) {
   })
   $('#start_draw_modal').modal('hide');
   map.addInteraction(draw);
+  map.addInteraction(snap);
+  flag_is_drawing_on = true; // set to drawing mode is on inside the flag
+};
+
+function start_edit() {
+  edit = new ol.interaction.Modify({
+    source: draw_source
+  });
+  snap = new ol.interaction.Snap({
+    source: draw_source
+  })
+  $('#start_draw_modal').modal('hide');
+  map.addInteraction(edit);
+  map.addInteraction(snap);
   flag_is_drawing_on = true; // set to drawing mode is on inside the flag
 };
