@@ -1,6 +1,7 @@
 // All global variables
 var edit;
 var draw;
+var snap;
 var flag_is_drawing_on = false;
 // Custom Control
 class drawing_app extends ol.control.Control {
