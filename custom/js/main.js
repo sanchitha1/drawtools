@@ -29,8 +29,9 @@ class drawing_app extends ol.control.Control {
   start_stop_drawing() {
     if (flag_is_drawing_on == false) { // checking if the drawing mode is on
       $('#start_draw_modal').modal('show'); // if not show modal
-    } else{
+    } else {
       map.removeInteraction(draw); // if drawing mode is on, then turn it off
+      map.removeInteraction(edit); // if edit mode is on, then turn it off
       flag_is_drawing_on = false; // setting the drawing mode to initial status
     }
   }
