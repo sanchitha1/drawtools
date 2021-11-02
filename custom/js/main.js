@@ -80,6 +80,9 @@ function start_draw(geom_type) {
     type: geom_type,
     source: draw_source
   });
+  snap = new ol.interaction.Snap({
+    source: draw_source
+  })
   $('#start_draw_modal').modal('hide');
   map.addInteraction(draw);
   flag_is_drawing_on = true; // set to drawing mode is on inside the flag
