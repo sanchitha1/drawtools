@@ -35,6 +35,7 @@ class drawing_app extends ol.control.Control {
       map.removeInteraction(edit); // if edit mode is on, then turn it off
       flag_is_drawing_on = false; // setting the drawing mode to initial status
       document.getElementById('button_start').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
+      $('#enter_information_modal').modal('show');
     }
   }
 }
