@@ -115,6 +115,7 @@ function start_edit() {
   $('#start_draw_modal').modal('hide');
   map.addInteraction(edit);
   map.addInteraction(snap);
+  map.addInteraction(select_click);
   document.getElementById('button_start').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
   flag_is_drawing_on = true; // set to drawing mode is on inside the flag
 };
