@@ -3,6 +3,10 @@ var edit;
 var draw;
 var snap;
 var flag_is_drawing_on = false;
+var point_types = ['Trees', 'ATM', 'Telephone Booth', 'Telephone Poles', 'Electricity Poles'];
+var line_types = ['Roads', 'Rivers', 'Utility Lines'];
+var polygon_types = ['Buildings', 'Land', 'Grounds', 'Yards'];
+var selected_geom_type;
 // Custom Control
 class drawing_app extends ol.control.Control {
   /**
