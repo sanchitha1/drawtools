@@ -85,6 +85,7 @@ const map = new ol.Map({
 
 // Function to start drawing
 function start_draw(geom_type) {
+  selected_geom_type = geom_type;
   draw = new ol.interaction.Draw({
     type: geom_type,
     source: draw_source
