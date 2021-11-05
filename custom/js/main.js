@@ -15,11 +15,11 @@ class drawing_app extends ol.control.Control {
   constructor(opt_options) {
     const options = opt_options || {};
 
-    const button = document.createElement('button'); // Creating button element
+    var button = document.createElement('button'); // Creating button element
     button.id = 'button_start' // Creating button id
     button.innerHTML = '<i class="fas fa-draw-polygon"></i>'; // Creating button element
 
-    const element = document.createElement('div'); // Creating div element
+    var element = document.createElement('div'); // Creating div element
     element.className = 'draw-tool ol-unselectable ol-control'; // Creating element class
     element.appendChild(button); // Appending button element as a child element inside the div
 
@@ -47,36 +47,36 @@ class drawing_app extends ol.control.Control {
 
 
 // View
-const myview = new ol.View({
+var myview = new ol.View({
   projection: 'EPSG:4326',
   center: [80.98885377363007, 6.830454104603501], // remeber to set latlon in 'lon' first and 'lat' scecond
   zoom: 17
 });
 
 // OSM Layer
-const baseLayer = new ol.layer.Tile({
+var baseLayer = new ol.layer.Tile({
   source: new ol.source.OSM()
 });
 
 // Draw vector layer
 // 1. Define source
-const draw_source = new ol.source.Vector()
+var draw_source = new ol.source.Vector()
 // 2. Define layer
-const draw_layer = new ol.layer.Vector({
+var draw_layer = new ol.layer.Vector({
   source: draw_source
 })
 
 // Layer Array
-const layer_array = [baseLayer, draw_layer]
+var layer_array = [baseLayer, draw_layer]
 
 // Controls Attribute Collapse
-const mycontrols = new ol.control.defaults({
+var mycontrols = new ol.control.defaults({
   attributionOptions: {
     collapsible: true
   }
 }).extend([new drawing_app()]);
 // Map
-const map = new ol.Map({
+var map = new ol.Map({
   target: 'mymap',
   view: myview,
   layers: layer_array,
