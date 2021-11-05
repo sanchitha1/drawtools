@@ -108,7 +108,10 @@ function start_edit() {
   });
   snap = new ol.interaction.Snap({
     source: draw_source
-  })
+  });
+  select_click = new ol.interaction.Select({
+    condition: ol.events.condition.click,
+  });
   $('#start_draw_modal').modal('hide');
   map.addInteraction(edit);
   map.addInteraction(snap);
