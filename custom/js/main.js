@@ -2,6 +2,7 @@
 var edit;
 var draw;
 var snap;
+var select_click;
 var flag_is_drawing_on = false;
 var point_types = ['Trees', 'ATM', 'Telephone Booth', 'Telephone Poles', 'Electricity Poles'];
 var line_types = ['Roads', 'Rivers', 'Utility Lines'];
