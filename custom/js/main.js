@@ -114,3 +114,31 @@ function start_edit() {
   document.getElementById('button_start').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
   flag_is_drawing_on = true; // set to drawing mode is on inside the flag
 };
+
+// function to add types of feature
+function define_type_of_features() {
+  var drop_down_of_types = document.getElementById('type_of_features'); // Cathing HTML element with id='types_of_features' <select>
+  drop_down_of_types.innerHTML = ''; // Clearing previous values of the element before creating the <options> dynamically
+  if (selected_geom_type == 'Point') {
+    for (let i = 0; i < point_types.length; i++) {
+      var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
+      op.value = point_types[i]; //Assigning values to <option>
+      op.innerHTML = point_types[i]; //Creating HTML elements for those assigned values
+      drop_down_of_types.appendChild(op); //Appending the created <option> element as a child element of <select> 
+    }
+  } else if (selected_geom_type == 'LineString') {
+    for (let i = 0; i < line_types.length; i++) {
+      var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
+      op.value = line_types[i]; //Assigning values to <option>
+      op.innerHTML = line_types[i]; //Creating HTML elements for those assigned values
+      drop_down_of_types.appendChild(op); //Appending the created <option> element as a child element of <select> 
+    }
+  } else {
+    for (let i = 0; i < polygon_types.length; i++) {
+      var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
+      op.value = polygon_types[i]; //Assigning values to <option>
+      op.innerHTML = polygon_types[i]; //Creating HTML elements for those assigned values
+      drop_down_of_types.appendChild(op); //Appending the created <option> element as a child element of <select> 
+    }
+  }
+}
