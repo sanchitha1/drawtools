@@ -147,3 +147,16 @@ function define_type_of_features() {
     }
   }
 }
+
+// function to find the clicked feature geometry type
+map.on('click', function(evt) {
+  var feature = map.forEachFeatureAtPixel(evt.pixel,
+    function(feature, layer) {
+      return feature;
+    });
+  if (feature) {
+    var geometry = feature.getGeometry();
+    var type = geometry.getType();
+    console.log(type);
+  }
+});
