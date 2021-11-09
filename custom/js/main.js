@@ -8,6 +8,7 @@ var point_types = ['Trees', 'ATM', 'Telephone Booth', 'Telephone Poles', 'Electr
 var line_types = ['Roads', 'Rivers', 'Utility Lines'];
 var polygon_types = ['Buildings', 'Land', 'Grounds', 'Yards'];
 var selected_geom_type;
+var edit_geom_type;
 // Custom Control
 class drawing_app extends ol.control.Control {
   /**
@@ -139,14 +140,14 @@ function start_edit() {
 function define_type_of_features() {
   var drop_down_of_types = document.getElementById('type_of_features'); // Cathing HTML element with id='types_of_features' <select>
   drop_down_of_types.innerHTML = ''; // Clearing previous values of the element before creating the <options> dynamically
-  if (selected_geom_type == 'Point') {
+  if (selected_geom_type == 'Point' || edit_geom_type == 'Point') {
     for (let i = 0; i < point_types.length; i++) {
       var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
       op.value = point_types[i]; //Assigning values to <option>
       op.innerHTML = point_types[i]; //Creating HTML elements for those assigned values
       drop_down_of_types.appendChild(op); //Appending the created <option> element as a child element of <select> 
     }
-  } else if (selected_geom_type == 'LineString') {
+  } else if (selected_geom_type == 'LineString' || edit_geom_type == 'LineString') {
     for (let i = 0; i < line_types.length; i++) {
       var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
       op.value = line_types[i]; //Assigning values to <option>
@@ -162,16 +163,3 @@ function define_type_of_features() {
     }
   }
 }
-
-// function to find the clicked feature geometry type
-map.on('click', function(evt) {
-  var feature = map.forEachFeatureAtPixel(evt.pixel,
-    function(feature, layer) {
-      return feature;
-    });
-  if (feature) {
-    var geometry = feature.getGeometry();
-    var type = geometry.getType();
-    console.log(type);
-  }
-});
