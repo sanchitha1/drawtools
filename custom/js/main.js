@@ -118,6 +118,20 @@ function start_edit() {
   map.addInteraction(select_click);
   document.getElementById('button_start').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
   flag_is_drawing_on = true; // set to drawing mode is on inside the flag
+
+  // function to find the clicked feature geometry type
+  map.on('click', function(evt) {
+    var feature = map.forEachFeatureAtPixel(evt.pixel,
+      function(feature, layer) {
+        return feature;
+      });
+    if (feature) {
+      var geometry = feature.getGeometry();
+      var type = geometry.getType();
+      edit_geom_type = type;
+      console.log(type);
+    }
+  });
 };
 
 // function to add types of feature
