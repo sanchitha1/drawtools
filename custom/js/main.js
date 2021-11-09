@@ -16,20 +16,20 @@ class drawing_app extends ol.control.Control {
   constructor(opt_options) {
     const options = opt_options || {};
 
-    var button = document.createElement('button'); // Creating button element
-    button.id = 'button_start' // Creating button id
-    button.innerHTML = '<i class="fas fa-draw-polygon"></i>'; // Creating button element
+    var button_draw = document.createElement('button'); // Creating button element
+    button_draw.id = 'button_start' // Creating button id
+    button_draw.innerHTML = '<i class="fas fa-draw-polygon"></i>'; // Creating button element
 
-    var element = document.createElement('div'); // Creating div element
-    element.className = 'draw-tool ol-unselectable ol-control'; // Creating element class
-    element.appendChild(button); // Appending button element as a child element inside the div
+    var element_draw = document.createElement('div'); // Creating div element
+    element_draw.className = 'draw-tool ol-unselectable ol-control'; // Creating element class
+    element_draw.appendChild(button_draw); // Appending button element as a child element inside the div
 
     super({
-      element: element,
+      element: element_draw,
       target: options.target,
     });
 
-    button.addEventListener('click', this.start_stop_drawing.bind(this), false);
+    button_draw.addEventListener('click', this.start_stop_drawing.bind(this), false);
   }
 
   start_stop_drawing() { // Function when button is clicked
