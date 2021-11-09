@@ -38,6 +38,7 @@ class drawing_app extends ol.control.Control {
     } else { // If drawing mode is on
       map.removeInteraction(draw); // if drawing mode is on, then turn it off
       map.removeInteraction(edit); // if edit mode is on, then turn it off
+      map.removeInteraction(select_click); // if edit mode is on, then turn it off
       flag_is_drawing_on = false; // setting the drawing mode to initial status
       document.getElementById('button_start').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
       define_type_of_features(); // Activate the function in drawing mode on
