@@ -110,6 +110,9 @@ function start_draw(geom_type) {
 
 // Function Start Editing
 function start_edit() {
+  if (abort) { // if (abort == true) function will stop executing
+    return;
+  }
   edit = new ol.interaction.Modify({
     source: draw_source
   });
@@ -127,18 +130,27 @@ function start_edit() {
   flag_is_drawing_on = true; // set to drawing mode is on inside the flag
 
   // function to find the clicked feature geometry type
-  map.on('click', function(evt) {
-    var feature = map.forEachFeatureAtPixel(evt.pixel,
-      function(feature, layer) {
-        return feature;
-      });
-    if (feature) {
-      var geometry = feature.getGeometry();
-      var type = geometry.getType();
-      edit_geom_type = type;
-      console.log(type);
-    };
-  });
+
+};
+
+map.on('click', function(evt) {
+  if (abort) { // if (abort == true) function will stop executing
+    return;
+  }
+  var feature = map.forEachFeatureAtPixel(evt.pixel,
+    function(feature, layer) {
+      if (abort) { // if (abort == true) function will stop executing
+        return;
+      }
+      return feature;
+    });
+  if (feature) {
+    var geometry = feature.getGeometry();
+    var type = geometry.getType();
+    edit_geom_type = type;
+    console.log(type);
+  };
+});
 };
 
 // function to add types of feature
