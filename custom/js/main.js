@@ -151,7 +151,6 @@ map.on('click', function(evt) {
     console.log(type);
   };
 });
-};
 
 // function to add types of feature
 function define_type_of_features() {
