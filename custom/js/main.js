@@ -132,7 +132,7 @@ function start_edit() {
       var type = geometry.getType();
       edit_geom_type = type;
       console.log(type);
-    }
+    };
   });
 };
 
