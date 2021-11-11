@@ -1,4 +1,5 @@
 // All global variables
+var abort = true; // setting abort true on start to not to print gemetry type on console in draw option
 var edit;
 var draw;
 var snap;
