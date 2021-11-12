@@ -31,10 +31,10 @@ class drawing_app extends ol.control.Control {
       target: options.target,
     });
 
-    button_draw.addEventListener('click', this.start_stop_drawing.bind(this), false);
+    button_draw.addEventListener('click', this.start_stop_drawing_and_editing.bind(this), false);
   }
 
-  start_stop_drawing() { // Function when button is clicked
+  start_stop_drawing_and_editing() { // Function when button is clicked
     if (flag_is_drawing_on == false) { // checking if the drawing mode is off
       $('#start_draw_modal').modal('show'); // Then show modal
     } else { // If drawing mode is on
