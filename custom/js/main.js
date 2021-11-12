@@ -133,6 +133,7 @@ function start_edit() {
 
 };
 
+// function to find the clicked feature geometry type
 map.on('click', function(evt) {
   if (abort) { // if (abort == true) function will stop executing
     return;
