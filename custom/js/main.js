@@ -130,7 +130,7 @@ function start_edit() {
   flag_is_drawing_on = true; // set to drawing mode is on inside the flag
 
   // function to find the clicked feature geometry type
-
+  
 };
 
 // function to find the clicked feature geometry type
