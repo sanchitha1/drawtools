@@ -4,7 +4,7 @@ var edit;
 var draw;
 var snap;
 var select_click;
-var flag_is_drawing_on = false;
+var flag_is_drawing_or_editing_mode_on = false;
 var point_types = ['Trees', 'ATM', 'Telephone Booth', 'Telephone Poles', 'Electricity Poles'];
 var line_types = ['Roads', 'Rivers', 'Utility Lines'];
 var polygon_types = ['Buildings', 'Land', 'Grounds', 'Yards'];
@@ -35,12 +35,12 @@ class drawing_app extends ol.control.Control {
   }
 
   start_stop_drawing_and_editing() { // Function when button is clicked
-    if (flag_is_drawing_on == false) { // checking if the drawing mode is off
+    if (flag_is_drawing_or_editing_mode_on == false) { // checking if the drawing and editing mode is off
       $('#start_draw_modal').modal('show'); // Then show modal
     } else { // If drawing mode is on
       map.removeInteraction(draw); // if drawing mode is on, then turn it off
       map.removeInteraction(edit); // if edit mode is on, then turn it off
-      flag_is_drawing_on = false; // setting the drawing mode to initial status
+      flag_is_drawing_or_editing_mode_on = false; // setting the drawing and editing mode to initial status
       abort_edit = true; // if edit mode is on, stopping edit mode will set abort_edit to true -> means it stop the edit function as well as console.log('type');
       document.getElementById('button_start').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
       define_type_of_features(); // Activate the function in drawing mode on
@@ -105,7 +105,7 @@ function start_draw(geom_type) {
   map.addInteraction(snap);
   map.addInteraction(select_click);
   document.getElementById('button_start').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
-  flag_is_drawing_on = true; // set to drawing mode is on inside the flag
+  flag_is_drawing_or_editing_mode_on = true; // set to drawing and editing mode is on inside the flag
 };
 
 // Function Start Editing
@@ -127,7 +127,7 @@ function start_edit() {
   map.addInteraction(snap);
   map.addInteraction(select_click);
   document.getElementById('button_start').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
-  flag_is_drawing_on = true; // set to drawing mode is on inside the flag
+  flag_is_drawing_or_editing_mode_on = true; // set to drawing and editing mode is on inside the flag
 
   
 };
