@@ -1,5 +1,5 @@
 // All global variables
-var abort = true; // setting abort true on start to not to print gemetry type on console in draw option
+var abort_edit = true; // setting abort_edit true on start to not to print gemetry type on console in draw option
 var edit;
 var draw;
 var snap;
@@ -41,7 +41,7 @@ class drawing_app extends ol.control.Control {
       map.removeInteraction(draw); // if drawing mode is on, then turn it off
       map.removeInteraction(edit); // if edit mode is on, then turn it off
       flag_is_drawing_on = false; // setting the drawing mode to initial status
-      abort = true; // if edit mode is on, stopping edit mode will set abort to true -> means it stop the edit function as well as console.log('type');
+      abort_edit = true; // if edit mode is on, stopping edit mode will set abort_edit to true -> means it stop the edit function as well as console.log('type');
       document.getElementById('button_start').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
       define_type_of_features(); // Activate the function in drawing mode on
       $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after drawing a feature when draw mode is on
@@ -110,7 +110,7 @@ function start_draw(geom_type) {
 
 // Function Start Editing
 function start_edit() {
-  if (abort) { // if (abort == true) function will stop executing
+  if (abort_edit) { // if (abort_edit == true) function will stop executing
     return;
   }
   edit = new ol.interaction.Modify({
@@ -134,12 +134,12 @@ function start_edit() {
 
 // function to find the clicked feature geometry type
 map.on('click', function(evt) {
-  if (abort) { // if (abort == true) function will stop executing
+  if (abort_edit) { // if (abort_edit == true) function will stop executing
     return;
   }
   var feature = map.forEachFeatureAtPixel(evt.pixel,
     function(feature, layer) {
-      if (abort) { // if (abort == true) function will stop executing
+      if (abort_edit) { // if (abort_edit == true) function will stop executing
         return;
       }
       return feature;
