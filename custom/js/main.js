@@ -147,8 +147,9 @@ map.on('click', function(evt) {
   if (feature) {
     var geometry = feature.getGeometry();
     var type = geometry.getType();
-    edit_geom_type = type;
+    selected_geom_type = type; // Drop down options of the 'type of feature' is set to clicked geometry type in editing mode
     console.log(type);
+    console.log(selected_geom_type); // For debugging purpose
   };
 });
 
