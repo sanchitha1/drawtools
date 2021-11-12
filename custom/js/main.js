@@ -38,7 +38,7 @@ class drawing_app extends ol.control.Control {
     if (flag_is_drawing_or_editing_mode_on == false) { // checking if the drawing and editing mode is off
       $('#start_draw_modal').modal('show'); // Then show modal
     } else { // If drawing and editing mode is on
-      map.removeInteraction(draw); // if drawing and editing mode is on, then turn it off
+      map.removeInteraction(draw); // if drawing mode is on, then turn it off
       map.removeInteraction(edit); // if edit mode is on, then turn it off
       flag_is_drawing_or_editing_mode_on = false; // setting the drawing and editing mode to initial status
       abort_edit = true; // if edit mode is on, stopping edit mode will set abort_edit to true -> means it stop the edit function as well as console.log('type');
