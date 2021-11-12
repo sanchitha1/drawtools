@@ -129,7 +129,6 @@ function start_edit() {
   document.getElementById('button_start').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
   flag_is_drawing_on = true; // set to drawing mode is on inside the flag
 
-  // function to find the clicked feature geometry type
   
 };
 
