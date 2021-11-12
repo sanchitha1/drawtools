@@ -87,6 +87,12 @@ var map = new ol.Map({
   controls: mycontrols,
 });
 
+select_click = new ol.interaction.Select({
+  condition: ol.events.condition.click,
+});
+map.addInteraction(select_click);
+
+
 // Function to start drawing
 function start_draw(geom_type) {
   selected_geom_type = geom_type;
@@ -97,13 +103,9 @@ function start_draw(geom_type) {
   snap = new ol.interaction.Snap({
     source: draw_source
   });
-  select_click = new ol.interaction.Select({
-    condition: ol.events.condition.click,
-  });
   $('#start_draw_modal').modal('hide');
   map.addInteraction(draw);
   map.addInteraction(snap);
-  map.addInteraction(select_click);
   document.getElementById('button_start').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
   flag_is_drawing_or_editing_mode_on = true; // set to drawing and editing mode is on inside the flag
 };
@@ -129,7 +131,7 @@ function start_edit() {
   document.getElementById('button_start').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
   flag_is_drawing_or_editing_mode_on = true; // set to drawing and editing mode is on inside the flag
 
-  
+
 };
 
 // function to find the clicked feature geometry type
