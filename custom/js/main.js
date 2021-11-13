@@ -151,12 +151,21 @@ map.on('click', function(evt) {
     }, {
       hitTolerance: 8,
     });
-  if (feature) {
+  if (feature) { // if featuer exist
     var geometry = feature.getGeometry();
     var type = geometry.getType();
     selected_geom_type = type; // Drop down options of the 'type of feature' is set to clicked geometry type in editing mode
     console.log(type);
     console.log(selected_geom_type); // For debugging purpose
+    button_draw.addEventListener('click', function start_edit() { // if feature exists, when draw button is clicked, start edit() function is executed
+      if (type == 'Point') {  // if feature type is 'Point' 
+        selected_geom_type = 'Point'; // selected geom type becomes point
+      } else if (type == 'LineString') { //  so on the rest
+        selected_geom_type = 'LineString';
+      } else if (type == 'Polygon') {
+        selected_geom_type = 'Polygon';
+      }
+    });
   };
 });
 
