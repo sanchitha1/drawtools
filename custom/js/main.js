@@ -91,6 +91,7 @@ var map = new ol.Map({
 
 select_click = new ol.interaction.Select({
   condition: ol.events.condition.click,
+  hitTolerance: 1
 });
 map.addInteraction(select_click);
 
