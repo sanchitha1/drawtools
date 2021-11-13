@@ -148,6 +148,8 @@ map.on('click', function(evt) {
         return;
       }
       return feature;
+    }, {
+      hitTolerance: 8,
     });
   if (feature) {
     var geometry = feature.getGeometry();
