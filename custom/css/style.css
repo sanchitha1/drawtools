@@ -11,6 +11,11 @@ body {
 
 
 .draw-tool{
-    top: 65px;
+    top: 55px;
+    left: .5em;
+}
+
+.edit-tool{
+    top: 80px;
     left: .5em;
 }
