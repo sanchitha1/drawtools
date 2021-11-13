@@ -1,7 +1,6 @@
 // All global variables
 var button_draw
 var button_edit
-var abort_edit = true; // setting abort_edit true on start to not to print gemetry type on console in draw option
 var edit;
 var draw;
 var snap;
@@ -43,7 +42,6 @@ class drawing_button extends ol.control.Control {
       map.removeInteraction(draw); // if drawing mode is on, then turn it off
       map.removeInteraction(edit); // if edit mode is on, then turn it off
       flag_is_drawing_or_editing_mode_on = false; // setting the drawing and editing mode to initial status
-      abort_edit = true; // if edit mode is on, stopping edit mode will set abort_edit to true -> means it stop the edit function as well as console.log('type');
       document.getElementById('button_start_draw').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
       define_type_of_features(); // Activate the function in drawing and editing mode on
       $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after drawing a feature when draw mode is on
@@ -144,9 +142,6 @@ function start_draw(geom_type) {
 
 // Function Start Editing
 function start_edit() {
-  if (abort_edit) { // if (abort_edit == true) function will stop executing
-    return;
-  }
   edit = new ol.interaction.Modify({
     source: draw_source
   });
@@ -168,14 +163,8 @@ function start_edit() {
 
 // function to find the clicked feature geometry type
 map.on('click', function(evt) {
-  if (abort_edit) { // if (abort_edit == true) function will stop executing
-    return;
-  }
   var feature = map.forEachFeatureAtPixel(evt.pixel,
     function(feature, layer) {
-      if (abort_edit) { // if (abort_edit == true) function will stop executing
-        return;
-      }
       return feature;
     }, {
       hitTolerance: 8,
@@ -183,7 +172,6 @@ map.on('click', function(evt) {
   if (feature) { // if featuer exist
     var geometry = feature.getGeometry();
     var type = geometry.getType();
-    selected_geom_type = type; // Drop down options of the 'type of feature' is set to clicked geometry type in editing mode
     console.log(type);
     console.log(selected_geom_type); // For debugging purpose
     button_draw.addEventListener('click', function start_edit() { // if feature exists, when draw button is clicked, start edit() function is executed
