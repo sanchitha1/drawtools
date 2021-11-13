@@ -13,7 +13,7 @@ var polygon_types = ['Buildings', 'Land', 'Grounds', 'Yards'];
 var selected_geom_type;
 var edit_geom_type;
 // Custom Control
-class drawing_app extends ol.control.Control {
+class drawing_button extends ol.control.Control {
   /**
    * @param {Object} [opt_options] Control options.
    */
