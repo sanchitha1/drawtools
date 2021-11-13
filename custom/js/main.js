@@ -109,7 +109,7 @@ function start_draw(geom_type) {
   $('#start_draw_modal').modal('hide');
   map.addInteraction(draw);
   map.addInteraction(snap);
-  document.getElementById('button_start').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
+  document.getElementById('button_start_draw').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
   flag_is_drawing_or_editing_mode_on = true; // set to drawing and editing mode is on inside the flag
 };
 
@@ -131,7 +131,7 @@ function start_edit() {
   map.addInteraction(edit);
   map.addInteraction(snap);
   map.addInteraction(select_click);
-  document.getElementById('button_start').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
+  document.getElementById('button_start_draw').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
   flag_is_drawing_or_editing_mode_on = true; // set to drawing and editing mode is on inside the flag
 
 
