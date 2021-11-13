@@ -20,8 +20,8 @@ class drawing_button extends ol.control.Control {
   constructor(opt_options) {
     const options = opt_options || {};
 
-    var button_draw = document.createElement('button'); // Creating button element
-    button_draw.id = 'button_start' // Creating button id
+    button_draw = document.createElement('button'); // Creating button element
+    button_draw.id = 'button_start_draw' // Creating button id
     button_draw.innerHTML = '<i class="fas fa-draw-polygon"></i>'; // Creating button element
 
     var element_draw = document.createElement('div'); // Creating div element
