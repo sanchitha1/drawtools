@@ -51,6 +51,34 @@ class drawing_button extends ol.control.Control {
   }
 }
 
+class editing_button extends ol.control.Control {
+  /**
+   * @param {Object} [opt_options] Control options.
+   */
+  constructor(opt_options) {
+    const options = opt_options || {};
+
+    button_edit = document.createElement('button'); // Creating button element
+    button_edit.id = 'button_start_edit' // Creating button id
+    button_edit.innerHTML = '<i class="fas fa-edit"></i>'; // Creating button element
+
+    var element_edit = document.createElement('div'); // Creating div element
+    element_edit.className = 'edit-tool ol-unselectable ol-control'; // Creating element class
+    element_edit.appendChild(button_edit); // Appending button element as a child element inside the div
+
+    super({
+      element: element_edit,
+      target: options.target,
+    });
+
+    button_edit.addEventListener('click', this.start_stop_editing.bind(this), false);
+  }
+
+  start_stop_editing() { // Function when button is clicked
+    console.log("hit")
+  }
+}
+
 
 // View
 var myview = new ol.View({
