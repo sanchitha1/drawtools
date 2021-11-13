@@ -1,4 +1,6 @@
 // All global variables
+var button_draw
+var button_edit
 var abort_edit = true; // setting abort_edit true on start to not to print gemetry type on console in draw option
 var edit;
 var draw;
