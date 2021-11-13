@@ -44,7 +44,7 @@ class drawing_button extends ol.control.Control {
       map.removeInteraction(edit); // if edit mode is on, then turn it off
       flag_is_drawing_or_editing_mode_on = false; // setting the drawing and editing mode to initial status
       abort_edit = true; // if edit mode is on, stopping edit mode will set abort_edit to true -> means it stop the edit function as well as console.log('type');
-      document.getElementById('button_start').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
+      document.getElementById('button_start_draw').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
       define_type_of_features(); // Activate the function in drawing and editing mode on
       $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after drawing a feature when draw mode is on
     }
