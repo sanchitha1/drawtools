@@ -96,6 +96,29 @@ class deleting_button extends ol.control.Control {
   constructor(opt_options) {
     const options = opt_options || {};
 
+    button_delete = document.createElement('button'); // Creating button element
+    button_delete.id = 'button_start_delete' // Creating button id
+    button_delete.innerHTML = '<i class="fas fa-trash-alt"></i>'; // Creating button element
+
+    var element_delete = document.createElement('div'); // Creating div element
+    element_delete.className = 'delete-tool ol-unselectable ol-control'; // Creating element class
+    element_delete.appendChild(button_delete); // Appending button element as a child element inside the div
+
+    super({
+      element: element_delete,
+      target: options.target,
+    });
+
+    button_delete.addEventListener('click', this.start_stop_deleting.bind(this), false);
+  }
+
+  start_stop_deleting() { // Function when button is clicked
+    alert("Are you sure, you want to permenantly DELETE this feature!?")
+    if (feature){
+      draw_source.removeFeature(feature)
+    }
+  }
+}
 // View
 var myview = new ol.View({
   projection: 'EPSG:4326',
