@@ -41,9 +41,8 @@ class drawing_button extends ol.control.Control {
       $('#start_draw_modal').modal('show'); // Then show modal
     } else { // If drawing and editing mode is on
       map.removeInteraction(draw); // if drawing mode is on, then turn it off
-      map.removeInteraction(edit); // if edit mode is on, then turn it off
-      abort = true; // clicking stop button will set abort = true means function will stop executing in default mode.
-      flag_is_drawing_or_editing_mode_on = false; // setting the drawing and editing mode to initial status
+      abort = false; // when draw mode is off, map on click function termication will be closed means function can be executed again
+      flag_is_drawing_mode_on = false; // setting the drawing and editing mode to initial status
       document.getElementById('button_start_draw').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
       define_type_of_features(); // Activate the function in drawing and editing mode on
       $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after drawing a feature when draw mode is on
@@ -108,7 +107,7 @@ var mycontrols = new ol.control.defaults({
   attributionOptions: {
     collapsible: true
   }
-}).extend([new drawing_button(),new editing_button()]);
+}).extend([new drawing_button(), new editing_button()]);
 
 // Map
 var map = new ol.Map({
@@ -127,6 +126,7 @@ map.addInteraction(select_click);
 
 // Function to start drawing
 function start_draw(geom_type) {
+  abort = true; // map on click function will stop execution
   selected_geom_type = geom_type;
   draw = new ol.interaction.Draw({
     type: geom_type,
@@ -161,12 +161,12 @@ function start_edit() {
 
 // function to find the clicked feature geometry type
 map.on('click', function(evt) {
-  if(abort){ // if abort is true, function will stop executing
+  if (abort) { // if abort == true , function execution will stop
     return;
   }
   var feature = map.forEachFeatureAtPixel(evt.pixel,
     function(feature, layer) {
-      if (abort) { // if abort is true, function will stop executing
+      if (abort) { // if abort == true , function execution will stop
         return;
       }
       return feature;
@@ -174,14 +174,14 @@ map.on('click', function(evt) {
       hitTolerance: 8,
     });
   if (feature) { // if featuer exist
-    if (abort) { // if abort is true, function will stop executing
+    if (abort) { // if abort == true , function execution will stop
       return;
     }
     var geometry = feature.getGeometry();
     var type = geometry.getType();
     console.log(type);
     selected_geom_type = type;
-    console.log(selected_geom_type); // For debugging purpose
+    console.log(selected_geom_type);
   };
 });
 
