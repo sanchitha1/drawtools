@@ -172,7 +172,7 @@ map.on('click', function(evt) {
   if (abort) { // if abort == true , function execution will stop
     return;
   }
-  var feature = map.forEachFeatureAtPixel(evt.pixel,
+  feature = map.forEachFeatureAtPixel(evt.pixel,
     function(feature, layer) {
       if (abort) { // if abort == true , function execution will stop
         return;
