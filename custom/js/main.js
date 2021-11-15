@@ -1,7 +1,7 @@
 // All global variables
-var button_draw
-var button_edit
-var abort = true; // function will stop executing at initial state.
+var button_draw;
+var button_edit;
+var abort = false; // set abort to true from the begining of the inirialization , because if someone start edit after the map loads, he or she must be able to start editing
 var edit;
 var draw;
 var snap;
