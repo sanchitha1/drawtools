@@ -153,11 +153,8 @@ function start_edit() {
   });
   map.addInteraction(edit);
   map.addInteraction(snap);
-  map.addInteraction(select_click);
-  document.getElementById('button_start_draw').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
-  flag_is_drawing_or_editing_mode_on = true; // set to drawing and editing mode is on inside the flag
-
-
+  document.getElementById('button_start_edit').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
+  flag_is_editing_mode_on = true; // set to editing mode is on inside the flag
 };
 
 // function to find the clicked feature geometry type
