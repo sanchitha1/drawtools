@@ -6,7 +6,8 @@ var edit;
 var draw;
 var snap;
 var select_click;
-var flag_is_drawing_or_editing_mode_on = false;
+var flag_is_drawing_mode_on = false; // turning off the drawing mode begining of the inirializarion of the map to start the drawing mode
+var flag_is_editing_mode_on = false; // turning off the editing mode begining of the inirializarion of the map to start the editing mode
 var point_types = ['Trees', 'ATM', 'Telephone Booth', 'Telephone Poles', 'Electricity Poles'];
 var line_types = ['Roads', 'Rivers', 'Utility Lines'];
 var polygon_types = ['Buildings', 'Land', 'Grounds', 'Yards'];
