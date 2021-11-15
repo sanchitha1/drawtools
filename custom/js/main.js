@@ -75,7 +75,15 @@ class editing_button extends ol.control.Control {
   }
 
   start_stop_editing() { // Function when button is clicked
-    console.log("hit")
+    if (flag_is_editing_mode_on == false) {
+      start_edit();
+    } else {
+      map.removeInteraction(edit); // if edit mode is on, then turn it off
+      flag_is_editing_mode_on = false
+      document.getElementById('button_start_edit').innerHTML = '<i class="fas fa-edit"></i>' // Setting the button to initial state
+      define_type_of_features(); // Activate the function in editing mode on
+      $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after editing a feature when edit mode is on
+    }
   }
 }
 
