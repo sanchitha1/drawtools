@@ -40,12 +40,12 @@ class drawing_button extends ol.control.Control {
   start_stop_drawing() { // Function when button is clicked
     if (flag_is_drawing_mode_on == false) { // checking if the drawing mode is off
       $('#start_draw_modal').modal('show'); // Then show modal
-    } else { // If drawing and editing mode is on
+    } else { // If drawing mode is on
       map.removeInteraction(draw); // if drawing mode is on, then turn it off
       abort = false; // when draw mode is off, map on click function termication will be closed means function can be executed again
-      flag_is_drawing_mode_on = false; // setting the drawing and editing mode to initial status
+      flag_is_drawing_mode_on = false; // setting the drawing mode to initial status
       document.getElementById('button_start_draw').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
-      define_type_of_features(); // Activate the function in drawing and editing mode on
+      define_type_of_features(); // Activate the function in drawing mode on
       $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after drawing a feature when draw mode is on
     }
   }
