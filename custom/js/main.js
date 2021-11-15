@@ -89,6 +89,12 @@ class editing_button extends ol.control.Control {
   }
 }
 
+class deleting_button extends ol.control.Control {
+  /**
+   * @param {Object} [opt_options] Control options.
+   */
+  constructor(opt_options) {
+    const options = opt_options || {};
 
 // View
 var myview = new ol.View({
