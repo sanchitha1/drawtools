@@ -140,7 +140,7 @@ function start_draw(geom_type) {
   map.addInteraction(draw);
   map.addInteraction(snap);
   document.getElementById('button_start_draw').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
-  flag_is_drawing_or_editing_mode_on = true; // set to drawing and editing mode is on inside the flag
+  flag_is_drawing_mode_on = true; // set to drawing mode is on inside the flag
 };
 
 // Function Start Editing
