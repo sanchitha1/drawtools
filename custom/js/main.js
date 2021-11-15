@@ -1,6 +1,7 @@
 // All global variables
 var button_draw
 var button_edit
+var abort = true; // function will stop executing at initial state.
 var edit;
 var draw;
 var snap;
@@ -41,6 +42,7 @@ class drawing_button extends ol.control.Control {
     } else { // If drawing and editing mode is on
       map.removeInteraction(draw); // if drawing mode is on, then turn it off
       map.removeInteraction(edit); // if edit mode is on, then turn it off
+      abort = true; // clicking stop button will set abort = true means function will stop executing in default mode.
       flag_is_drawing_or_editing_mode_on = false; // setting the drawing and editing mode to initial status
       document.getElementById('button_start_draw').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
       define_type_of_features(); // Activate the function in drawing and editing mode on
@@ -163,26 +165,27 @@ function start_edit() {
 
 // function to find the clicked feature geometry type
 map.on('click', function(evt) {
+  if(abort){ // if abort is true, function will stop executing
+    return;
+  }
   var feature = map.forEachFeatureAtPixel(evt.pixel,
     function(feature, layer) {
+      if (abort) { // if abort is true, function will stop executing
+        return;
+      }
       return feature;
     }, {
       hitTolerance: 8,
     });
   if (feature) { // if featuer exist
+    if (abort) { // if abort is true, function will stop executing
+      return;
+    }
     var geometry = feature.getGeometry();
     var type = geometry.getType();
     console.log(type);
+    selected_geom_type = type;
     console.log(selected_geom_type); // For debugging purpose
-    button_draw.addEventListener('click', function start_edit() { // if feature exists, when draw button is clicked, start edit() function is executed
-      if (type == 'Point') {  // if feature type is 'Point' 
-        selected_geom_type = 'Point'; // selected geom type becomes point
-      } else if (type == 'LineString') { //  so on the rest
-        selected_geom_type = 'LineString';
-      } else if (type == 'Polygon') {
-        selected_geom_type = 'Polygon';
-      }
-    });
   };
 });
 
