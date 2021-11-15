@@ -179,7 +179,7 @@ map.on('click', function(evt) {
     }, {
       hitTolerance: 8,
     });
-  if (feature) { // if featuer exist
+  if (feature) { // if feature; exist
     if (abort) { // if abort == true , function execution will stop
       return;
     }
