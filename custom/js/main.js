@@ -118,7 +118,7 @@ var mycontrols = new ol.control.defaults({
   attributionOptions: {
     collapsible: true
   }
-}).extend([new drawing_button(), new editing_button()]);
+}).extend([new drawing_button(), new editing_button(), new deleting_button()]);
 
 // Map
 var map = new ol.Map({
