@@ -34,11 +34,11 @@ class drawing_button extends ol.control.Control {
       target: options.target,
     });
 
-    button_draw.addEventListener('click', this.start_stop_drawing_and_editing.bind(this), false);
+    button_draw.addEventListener('click', this.start_stop_drawing.bind(this), false);
   }
 
-  start_stop_drawing_and_editing() { // Function when button is clicked
-    if (flag_is_drawing_or_editing_mode_on == false) { // checking if the drawing and editing mode is off
+  start_stop_drawing() { // Function when button is clicked
+    if (flag_is_drawing_mode_on == false) { // checking if the drawing mode is off
       $('#start_draw_modal').modal('show'); // Then show modal
     } else { // If drawing and editing mode is on
       map.removeInteraction(draw); // if drawing mode is on, then turn it off
