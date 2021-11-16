@@ -20,39 +20,48 @@ var selected_geom_type;
 var edit_geom_type;
 var feature;
 // Custom Control
-class drawing_button extends ol.control.Control {
+class polygon_button extends ol.control.Control {
   /**
    * @param {Object} [opt_options] Control options.
    */
   constructor(opt_options) {
     const options = opt_options || {};
 
-    button_draw = document.createElement('button'); // Creating button element
-    button_draw.id = 'button_start_draw' // Creating button id
-    button_draw.innerHTML = '<i class="fas fa-draw-polygon"></i>'; // Creating button element
+    button_polygon = document.createElement('button'); // Creating button element
+    button_polygon.id = 'button_polygon' // Creating button id
+    button_polygon.innerHTML = '<i class="fas fa-draw-polygon"></i>'; // Creating button element
+    // button_polygon.setAttribute('data-toggle', "tooltip");
+    // button_polygon.setAttribute('data-placement', "right");
+    button_polygon.title = 'Draw polygon';
 
-    var element_draw = document.createElement('div'); // Creating div element
-    element_draw.className = 'draw-tool ol-unselectable ol-control'; // Creating element class
-    element_draw.appendChild(button_draw); // Appending button element as a child element inside the div
+    var element_polygon = document.createElement('div'); // Creating div element
+    element_polygon.className = 'polygon-tool ol-unselectable ol-control'; // Creating element class
+    element_polygon.appendChild(button_polygon); // Appending button element as a child element inside the div
 
     super({
-      element: element_draw,
+      element: element_polygon,
       target: options.target,
     });
 
-    button_draw.addEventListener('click', this.start_stop_drawing.bind(this), false);
+    button_polygon.addEventListener('click', this.start_polygon_draw.bind(this), false);
   }
 
-  start_stop_drawing() { // Function when button is clicked
-    if (flag_is_drawing_mode_on == false) { // checking if the drawing mode is off
-      $('#start_draw_modal').modal('show'); // Then show modal
-    } else { // If drawing mode is on
-      map.removeInteraction(draw); // if drawing mode is on, then turn it off
-      abort = false; // when draw mode is off, map on click function termication will be closed means function can be executed again
-      flag_is_drawing_mode_on = false; // setting the drawing mode to initial status
-      document.getElementById('button_start_draw').innerHTML = '<i class ="fas fa-draw-polygon"></i>' // Setting the button to initial state
-      define_type_of_features(); // Activate the function in drawing mode on
-      $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after drawing a feature when draw mode is on
+  start_polygon_draw() { // Function when button is clicked
+    selected_geom_type = 'Polygon';
+    if (flag_is_polygon_mode_on == false) {
+      abort = true; // map on click function will stop execution
+      draw = new ol.interaction.Draw({
+        type: 'Polygon',
+        source: draw_source
+      });
+      map.addInteraction(draw);
+      button_polygon.innerHTML = '<i class ="far fa-stop-circle"></i>'; // Creating button element
+      flag_is_polygon_mode_on = true;
+    } else {
+      abort = false
+      map.removeInteraction(draw);
+      flag_is_polygon_mode_on = false;
+      button_polygon.innerHTML = '<i class="fas fa-draw-polygon"></i>'; // Creating button element
     }
   }
 }
@@ -94,6 +103,95 @@ class editing_button extends ol.control.Control {
   }
 }
 
+class point_button extends ol.control.Control {
+  /**
+   * @param {Object} [opt_options] Control options.
+   */
+  constructor(opt_options) {
+    const options = opt_options || {};
+
+    button_point = document.createElement('button'); // Creating button element
+    button_point.id = 'button_point' // Creating button id
+    button_point.innerHTML = '<i class="fas fa-map-marker-alt"></i>'; // Creating button element
+    button_point.title = 'Draw point';
+
+    var element_point = document.createElement('div'); // Creating div element
+    element_point.className = 'point-tool ol-unselectable ol-control'; // Creating element class
+    element_point.appendChild(button_point); // Appending button element as a child element inside the div
+
+    super({
+      element: element_point,
+      target: options.target,
+    });
+
+    button_point.addEventListener('click', this.start_point_draw.bind(this), false);
+  }
+
+  start_point_draw() { // Function when button is clicked
+    selected_geom_type = 'Point';
+    if (flag_is_point_mode_on == false) {
+      abort = true; // map on click function will stop execution
+      draw = new ol.interaction.Draw({
+        type: 'Point',
+        source: draw_source
+      });
+      map.addInteraction(draw);
+      button_point.innerHTML = '<i class ="far fa-stop-circle"></i>'; // Creating button element
+      flag_is_point_mode_on = true;
+    } else {
+      abort = false; // map on click function will stop execution
+      map.removeInteraction(draw);
+      flag_is_point_mode_on = false;
+      button_point.innerHTML = '<i class="fas fa-map-marker-alt"></i>'; // Creating button element
+    }
+  }
+}
+
+class line_button extends ol.control.Control {
+  /**
+   * @param {Object} [opt_options] Control options.
+   */
+  constructor(opt_options) {
+    const options = opt_options || {};
+
+    button_line = document.createElement('button'); // Creating button element
+    button_line.id = 'button_line' // Creating button id
+    button_line.innerHTML = '<i class="fas fa-bezier-curve"></i>'; // Creating button element
+    button_line.title = 'Draw Line';
+
+
+    var element_line = document.createElement('div'); // Creating div element
+    element_line.className = 'line-tool ol-unselectable ol-control'; // Creating element class
+    element_line.appendChild(button_line); // Appending button element as a child element inside the div
+
+    super({
+      element: element_line,
+      target: options.target,
+    });
+
+    button_line.addEventListener('click', this.start_line_draw.bind(this), false);
+  }
+
+  start_line_draw() { // Function when button is clicked
+    selected_geom_type = 'LineString';
+    if (flag_is_line_mode_on == false) {
+      abort = true; // map on click function will stop execution
+      draw = new ol.interaction.Draw({
+        type: 'LineString',
+        source: draw_source
+      });
+      map.addInteraction(draw);
+      button_line.innerHTML = '<i class ="far fa-stop-circle"></i>'; // Creating button element
+      flag_is_line_mode_on = true;
+    } else {
+      abort = false; // map on click function will stop execution
+      map.removeInteraction(draw);
+      flag_is_line_mode_on = false;
+      button_line.innerHTML = '<i class="fas fa-bezier-curve"></i>'; // Creating button element
+    }
+  }
+}
+
 class deleting_button extends ol.control.Control {
   /**
    * @param {Object} [opt_options] Control options.
@@ -120,9 +218,8 @@ class deleting_button extends ol.control.Control {
 
   start_stop_deleting() { // Function when button is clicked
     if (feature) { // if feature exist after click
-    alert("Are you sure, you want to permenantly DELETE this feature!?")
-    if (feature){
-      draw_source.removeFeature(feature)
+      alert("Are you sure, you want to permenantly DELETE this feature!?")
+      draw_source.removeFeature(feature); // remove clicked feature
     }
   }
 }
