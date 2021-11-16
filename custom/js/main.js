@@ -10,6 +10,9 @@ var draw;
 var snap;
 var select_click;
 var flag_is_editing_mode_on = false; // turning off the editing mode begining of the inirializarion of the map to start the editing mode
+var flag_is_point_mode_on = false; // turning off the editing mode begining of the inirializarion of the map to start the editing mode
+var flag_is_polygon_mode_on = false;
+var flag_is_line_mode_on = false;
 var point_types = ['Trees', 'ATM', 'Telephone Booth', 'Telephone Poles', 'Electricity Poles'];
 var line_types = ['Roads', 'Rivers', 'Utility Lines'];
 var polygon_types = ['Buildings', 'Land', 'Grounds', 'Yards'];
