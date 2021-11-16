@@ -249,3 +249,9 @@ function define_type_of_features() {
     }
   }
 }
+
+draw_source.on('addfeature', function(event) {
+  console.log("Drawing Finished!")
+  define_type_of_features(); // Activate the function in editing mode on
+  $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after editing a feature when edit mode is on
+});
