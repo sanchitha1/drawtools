@@ -9,17 +9,31 @@ body {
     height: 100%;
 }
 
-
-.draw-tool{
+.point-tool {
     top: 55px;
     left: .5em;
 }
 
-.edit-tool{
+.line-tool {
     top: 80px;
     left: .5em;
 }
-.delete-tool{
+
+.polygon-tool{
     top: 105px;
     left: .5em;
+}
+
+.edit-tool{
+    top: 130px;
+    left: .5em;
+}
+
+.delete-tool{
+    top: 155px;
+    left: .5em;
+}
+
+.tooltip-inner {
+    white-space: nowrap;
 }
