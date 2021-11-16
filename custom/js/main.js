@@ -1,13 +1,14 @@
 // All global variables
-var button_draw;
+var button_polygon;
 var button_edit;
 var button_delete;
+var button_point;
+var button_line;
 var abort = false; // set abort to true from the begining of the inirialization , because if someone start edit after the map loads, he or she must be able to start editing
 var edit;
 var draw;
 var snap;
 var select_click;
-var flag_is_drawing_mode_on = false; // turning off the drawing mode begining of the inirializarion of the map to start the drawing mode
 var flag_is_editing_mode_on = false; // turning off the editing mode begining of the inirializarion of the map to start the editing mode
 var point_types = ['Trees', 'ATM', 'Telephone Booth', 'Telephone Poles', 'Electricity Poles'];
 var line_types = ['Roads', 'Rivers', 'Utility Lines'];
@@ -165,25 +166,6 @@ select_click = new ol.interaction.Select({
   hitTolerance: 1
 });
 map.addInteraction(select_click);
-
-
-// Function to start drawing
-function start_draw(geom_type) {
-  abort = true; // map on click function will stop execution
-  selected_geom_type = geom_type;
-  draw = new ol.interaction.Draw({
-    type: geom_type,
-    source: draw_source
-  });
-  snap = new ol.interaction.Snap({
-    source: draw_source
-  });
-  $('#start_draw_modal').modal('hide');
-  map.addInteraction(draw);
-  map.addInteraction(snap);
-  document.getElementById('button_start_draw').innerHTML = '<i class ="far fa-stop-circle"></i>' // Activating the stop button
-  flag_is_drawing_mode_on = true; // set to drawing mode is on inside the flag
-};
 
 // Function Start Editing
 function start_edit() {
