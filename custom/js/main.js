@@ -113,6 +113,7 @@ class deleting_button extends ol.control.Control {
   }
 
   start_stop_deleting() { // Function when button is clicked
+    if (feature) { // if feature exist after click
     alert("Are you sure, you want to permenantly DELETE this feature!?")
     if (feature){
       draw_source.removeFeature(feature)
