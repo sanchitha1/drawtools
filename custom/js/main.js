@@ -63,6 +63,7 @@ class editing_button extends ol.control.Control {
     button_edit = document.createElement('button'); // Creating button element
     button_edit.id = 'button_start_edit' // Creating button id
     button_edit.innerHTML = '<i class="fas fa-edit"></i>'; // Creating button element
+    button_edit.title = 'Edit features';
 
     var element_edit = document.createElement('div'); // Creating div element
     element_edit.className = 'edit-tool ol-unselectable ol-control'; // Creating element class
@@ -99,6 +100,7 @@ class deleting_button extends ol.control.Control {
     button_delete = document.createElement('button'); // Creating button element
     button_delete.id = 'button_start_delete' // Creating button id
     button_delete.innerHTML = '<i class="fas fa-trash-alt"></i>'; // Creating button element
+    button_delete.title = 'Delete features';
 
     var element_delete = document.createElement('div'); // Creating div element
     element_delete.className = 'delete-tool ol-unselectable ol-control'; // Creating element class
