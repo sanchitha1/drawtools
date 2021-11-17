@@ -30,8 +30,8 @@ class polygon_button extends ol.control.Control {
     button_polygon = document.createElement('button'); // Creating button element
     button_polygon.id = 'button_polygon' // Creating button id
     button_polygon.innerHTML = '<i class="fas fa-draw-polygon"></i>'; // Creating button element
-    // button_polygon.setAttribute('data-toggle', "tooltip");
-    // button_polygon.setAttribute('data-placement', "right");
+    button_polygon.setAttribute('data-toggle', "tooltip"); // Setting attributes to the button
+    button_polygon.setAttribute('data-placement', "right"); // Setting attributes to the button
     button_polygon.title = 'Draw polygon';
 
     var element_polygon = document.createElement('div'); // Creating div element
@@ -76,6 +76,8 @@ class editing_button extends ol.control.Control {
     button_edit = document.createElement('button'); // Creating button element
     button_edit.id = 'button_start_edit' // Creating button id
     button_edit.innerHTML = '<i class="fas fa-edit"></i>'; // Creating button element
+    button_edit.setAttribute('data-toggle', "tooltip"); // Setting attributes to the button
+    button_edit.setAttribute('data-placement', "right"); // Setting attributes to the button
     button_edit.title = 'Edit features';
 
     var element_edit = document.createElement('div'); // Creating div element
@@ -113,6 +115,8 @@ class point_button extends ol.control.Control {
     button_point = document.createElement('button'); // Creating button element
     button_point.id = 'button_point' // Creating button id
     button_point.innerHTML = '<i class="fas fa-map-marker-alt"></i>'; // Creating button element
+    button_point.setAttribute('data-toggle', "tooltip"); // Setting attributes to the button
+    button_point.setAttribute('data-placement', "right"); // Setting attributes to the button
     button_point.title = 'Draw point';
 
     var element_point = document.createElement('div'); // Creating div element
@@ -157,6 +161,8 @@ class line_button extends ol.control.Control {
     button_line = document.createElement('button'); // Creating button element
     button_line.id = 'button_line' // Creating button id
     button_line.innerHTML = '<i class="fas fa-bezier-curve"></i>'; // Creating button element
+    button_line.setAttribute('data-toggle', "tooltip"); // Setting attributes to the button
+    button_line.setAttribute('data-placement', "right"); // Setting attributes to the button
     button_line.title = 'Draw Line';
 
 
@@ -202,6 +208,8 @@ class deleting_button extends ol.control.Control {
     button_delete = document.createElement('button'); // Creating button element
     button_delete.id = 'button_start_delete' // Creating button id
     button_delete.innerHTML = '<i class="fas fa-trash-alt"></i>'; // Creating button element
+    button_delete.setAttribute('data-toggle', "tooltip"); // Setting attributes to the button
+    button_delete.setAttribute('data-placement', "right"); // Setting attributes to the button
     button_delete.title = 'Delete features';
 
     var element_delete = document.createElement('div'); // Creating div element
