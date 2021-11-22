@@ -358,3 +358,26 @@ $('.ol-zoom-in, .ol-zoom-out').attr('data-toggle', "tooltip") // setting attribu
 $(function() { // activating tooltip for every element containing 'data-toggle="tooltip"'
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+// function to save information in to DATABASE
+function save_features_db(){
+  // get array of all features
+  var feature_array = draw_source.getFeatures();
+  // define geoJSON format
+  var geo_JSON_format = new ol.format.GeoJSON();
+  // use methord to convert feature to GeoJSON
+  var feature_Geo_JSON = geo_JSON_format.writeFeaturesObject(feature_array);
+  // Array of all GeoJSONs
+  var geo_JSON_feature_array = feature_Geo_JSON.features;
+
+  // console.log(geo_JSON_feature_array[0].geometry);
+
+  // Catching the type of feature to the variable
+  var type = $('#type_of_features').value;
+  // Catching the name of feature to the variable
+  var name = $('#name_of_feature').value;
+  // Cathing the Geometry of the feaure
+  var geom = JSON.stringify(geo_JSON_feature_array[0].geometry);
+
+  
+}
