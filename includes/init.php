@@ -21,3 +21,4 @@ try {
     echo "Error: " . $e->getMessage() . "<br>";
     echo "Line Number: " . $e->getLine();
 }
+?>
