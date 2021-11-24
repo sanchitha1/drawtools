@@ -363,21 +363,36 @@ $(function() { // activating tooltip for every element containing 'data-toggle="
 function save_features_db(){
   // get array of all features
   var feature_array = draw_source.getFeatures();
-  // define geoJSON format
-  var geo_JSON_format = new ol.format.GeoJSON();
-  // use methord to convert feature to GeoJSON
-  var feature_Geo_JSON = geo_JSON_format.writeFeaturesObject(feature_array);
-  // Array of all GeoJSONs
-  var geo_JSON_feature_array = feature_Geo_JSON.features;
+  console.log("Array of all features: ")
+  console.log(feature_array);
 
-  // console.log(geo_JSON_feature_array[0].geometry);
+  // define geoJSON format convertor
+  var geo_JSON_format = new ol.format.GeoJSON();
+  // console.log(geo_JSON_format);
+
+  // use methord to convert features to a GeoJSON object
+  var feature_Geo_JSON = geo_JSON_format.writeFeaturesObject(feature_array);
+  console.log("Converted all the features to GeoJSON Object: ");
+  console.log(feature_Geo_JSON);
+
+  // Gettting array of all features inside GeoJSON object in GeoJSON format
+  var geo_JSON_feature_array = feature_Geo_JSON.features;
+  console.log("Feature array in GeoJSON object format: ")
+  console.log(geo_JSON_feature_array);
+
+  // Selecting the only object inside the array and getting the geometry property
+  console.log("Only object inside the Feature array: ")
+  console.log(geo_JSON_feature_array[0].geometry);
 
   // Catching the type of feature to the variable
   var type = $('#type_of_features').value;
+
   // Catching the name of feature to the variable
   var name = $('#name_of_feature').value;
-  // Cathing the Geometry of the feaure
+
+  // Converting the geometry object to a string
   var geom = JSON.stringify(geo_JSON_feature_array[0].geometry);
+  console.log(geom);
 
   
 }
