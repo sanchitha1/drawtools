@@ -360,7 +360,7 @@ $(function() { // activating tooltip for every element containing 'data-toggle="
 })
 
 // function to save information in to DATABASE
-function save_features_db(){
+function save_features_db() {
   // get array of all features
   var feature_array = draw_source.getFeatures();
   console.log("Array of all features: ")
@@ -385,10 +385,12 @@ function save_features_db(){
   console.log(geo_JSON_feature_array[0].geometry);
 
   // Catching the type of feature to the variable
-  var type = $('#type_of_features').value;
+  var type = $('#type_of_features')[0].value;
+  console.log(type);
 
   // Catching the name of feature to the variable
-  var name = $('#name_of_feature').value;
+  var name = $('#name_of_feature')[0].value;
+  console.log(name);
 
   // Converting the geometry object to a string
   var geom = JSON.stringify(geo_JSON_feature_array[0].geometry);
