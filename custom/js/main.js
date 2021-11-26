@@ -50,16 +50,21 @@ class polygon_button extends ol.control.Control {
     selected_geom_type = 'Polygon';
     if (flag_is_polygon_mode_on == false) {
       abort = true; // map on click function will stop execution
+      snap = new ol.interaction.Snap({
+        source: draw_source
+      });
       draw = new ol.interaction.Draw({
         type: 'Polygon',
         source: draw_source
       });
       map.addInteraction(draw);
+      map.addInteraction(snap);
       button_polygon.innerHTML = '<i class ="far fa-stop-circle"></i>'; // Creating button element
       flag_is_polygon_mode_on = true;
     } else {
       abort = false
       map.removeInteraction(draw);
+      map.removeInteraction(snap);
       flag_is_polygon_mode_on = false;
       button_polygon.innerHTML = '<i class="fas fa-draw-polygon"></i>'; // Creating button element
     }
@@ -135,16 +140,21 @@ class point_button extends ol.control.Control {
     selected_geom_type = 'Point';
     if (flag_is_point_mode_on == false) {
       abort = true; // map on click function will stop execution
+      snap = new ol.interaction.Snap({
+        source: draw_source
+      });
       draw = new ol.interaction.Draw({
         type: 'Point',
         source: draw_source
       });
       map.addInteraction(draw);
+      map.addInteraction(snap);
       button_point.innerHTML = '<i class ="far fa-stop-circle"></i>'; // Creating button element
       flag_is_point_mode_on = true;
     } else {
       abort = false; // map on click function will stop execution
       map.removeInteraction(draw);
+      map.removeInteraction(snap);
       flag_is_point_mode_on = false;
       button_point.innerHTML = '<i class="fas fa-map-marker-alt"></i>'; // Creating button element
     }
@@ -182,16 +192,21 @@ class line_button extends ol.control.Control {
     selected_geom_type = 'LineString';
     if (flag_is_line_mode_on == false) {
       abort = true; // map on click function will stop execution
+      snap = new ol.interaction.Snap({
+        source: draw_source
+      });
       draw = new ol.interaction.Draw({
         type: 'LineString',
         source: draw_source
       });
       map.addInteraction(draw);
+      map.addInteraction(snap);
       button_line.innerHTML = '<i class ="far fa-stop-circle"></i>'; // Creating button element
       flag_is_line_mode_on = true;
     } else {
       abort = false; // map on click function will stop execution
       map.removeInteraction(draw);
+      map.removeInteraction(snap);
       flag_is_line_mode_on = false;
       button_line.innerHTML = '<i class="fas fa-bezier-curve"></i>'; // Creating button element
     }
