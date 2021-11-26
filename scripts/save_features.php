@@ -14,9 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // checking the server request metho
     $unsuccessful = array("status_code" => 201); // Defining an array with key value pair
 
     if ($query) { // if query executed sucessfully then below execute
-        echo json_encode($successful); // echo json_encode converting data to JSON format from PHP variables
+        echo json_encode($successful); // echo json_encode converting associative array into a JSON object from PHP variables
     } else {
-        echo json_encode($unsuccessful); // echo json_encode converting data to JSON format from PHP variables
+        echo json_encode($unsuccessful); // echo json_encode converting associative array into a JSON object from PHP variables
 
     }
 }
