@@ -18,7 +18,8 @@ var line_types = ['Roads', 'Rivers', 'Utility Lines'];
 var polygon_types = ['Buildings', 'Land', 'Grounds', 'Yards'];
 var selected_geom_type;
 var edit_geom_type;
-var feature;
+var feature; // Clicked feature on function to find clicked geometry
+var drawn_feature; // drawn feature after the feature is added to the map
 // Custom Control
 class polygon_button extends ol.control.Control {
   /**
