@@ -380,9 +380,9 @@ function save_features_db() {
   // define geoJSON format convertor
   var geo_JSON_format = new ol.format.GeoJSON();
 
-  // use methord to convert features to a GeoJSON object
-  var feature_Geo_JSON = geo_JSON_format.writeFeaturesObject(feature_array);
-  console.log("Converted all the features to GeoJSON Object: ");
+  // use methord to convert feature to a GeoJSON object
+  var feature_Geo_JSON = geo_JSON_format.writeFeatureObject(drawn_feature);
+  console.log("Converted the feature to GeoJSON Object: ");
   console.log(feature_Geo_JSON);
 
   // Catching the type of feature to the variable
@@ -394,7 +394,7 @@ function save_features_db() {
   console.log(name);
 
   // Converting the geometry object to a string
-  var geom = JSON.stringify(geo_JSON_feature_array[0].geometry);
+  var geom = JSON.stringify(feature_Geo_JSON.geometry);
   console.log(geom);
 
   if (type != '') { // If type is not empty
