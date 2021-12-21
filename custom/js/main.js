@@ -20,6 +20,7 @@ var selected_geom_type;
 var edit_geom_type;
 var feature; // Clicked feature on function to find clicked geometry
 var drawn_feature; // drawn feature after the feature is added to the map
+var load_features;
 // Custom Control
 class polygon_button extends ol.control.Control {
   /**
