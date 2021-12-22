@@ -1,30 +1,33 @@
 <?php
 include "../includes/init.php"; // including data base connection
 
-$sql = "SELECT *, ST_AsGeoJSON(geom) AS geojson FROM feature_drawn";
-// echo $sql;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') { // checking the server request methord, if that successful then below execute
+    $sql = "SELECT *, ST_AsGeoJSON(geom) AS geojson FROM feature_drawn";
+    // echo $sql;
 
-$query = $pdo->query($sql); // query executing
+    $query = $pdo->query($sql); // query executing
 
-$geojson = array(
-    'type' => 'FeatureCollection',
-    'features' => array(),
-);
-foreach ($query as $row) {
-    $feature = array
-        (
-        'type' => 'Feature',
-
-        'geometry' => json_decode($row['geojson'], true),
-        'properties' => array
-        (
-            'name' => $row['name'],
-            'type' => $row['type'],
-        ),
+    $geojson = array(
+        'type' => 'FeatureCollection',
+        'features' => array(),
     );
-    array_push($geojson['features'], $feature);
-}
+    foreach ($query as $row) {
+        $feature = array
+            (
+            'type' => 'Feature',
 
-// pg_close($dsn);
-// header('Content-type: application/json', true);
-echo json_encode($geojson);
+            'geometry' => json_decode($row['geojson'], true),
+            'properties' => array
+            (
+                'name' => $row['name'],
+                'type' => $row['type'],
+                'id' => $row['feature_id'],
+            ),
+        );
+        array_push($geojson['features'], $feature);
+    }
+
+    // pg_close($dsn);
+    // header('Content-type: application/json', true);
+    echo json_encode($geojson);
+}
