@@ -23,7 +23,7 @@ var drawn_feature; // drawn feature after the feature is added to the map
 var load_features;
 // Custom Control
 $.ajax({
-  type: 'GET',
+  type: 'POST',
   url: 'scripts/load_features.php',
   // dataType: 'json',
   success: function(data, status) {
