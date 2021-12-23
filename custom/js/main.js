@@ -113,6 +113,7 @@ $.ajax({
           flag_is_editing_mode_on = false
           document.getElementById('button_start_edit').innerHTML = '<i class="fas fa-edit"></i>' // Setting the button to initial state
           define_type_of_features(); // Activate the function in editing mode on
+          change_modal_button(); // Activate the function to change the modal button
           $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after editing a feature when edit mode is on
         }
       }
@@ -445,4 +446,11 @@ function save_features_db() {
     alert("Please select a feature type")
   }
 
+}
+
+function change_modal_button() { // function to change the modal button
+  document.getElementById("button_save").classList.remove('btn-primary'); // removing the button bootsrap class on button
+  document.getElementById("button_save").classList.add('btn-success'); // adding the button bootsrap class on button
+  document.getElementById("button_save").innerText = 'Update Feature'; // Changing the button name
+  document.getElementById("button_save").setAttribute('onclick', 'update_features_db()'); // Setting attributes to the button
 }
