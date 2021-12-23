@@ -251,6 +251,26 @@ $.ajax({
           var confirm_msg = confirm("Are you sure, you want to permenantly DELETE this feature!?");
           if (confirm_msg == true) { // if clicked ok confirm_msg returns true
             draw_source.removeFeature(feature); // remove clicked feature
+            $.ajax({
+              url: 'scripts/delete_features.php',
+              type: 'POST', // method
+              data: {
+                id_of_feature: f_id, // new variables for passing data
+              },
+              success: function(result_data) { // if the data passing is successsful, then functiopn for returning data
+                var result = JSON.parse(result_data); // converting returning data in to it's original state, String to --> Object form
+                console.log(result_data); // For debuging purposes
+                console.log(result); // For debuging purposes
+                if (result.status_code == 300) { // Checking the status code
+                  alert("Feature deleted successfully");
+                  console.log("Feature deleted successfully")
+                } else {
+                  alert("Feature was not deleted");
+                  console.log("Feature was not deleted successfully")
+                }
+              }
+            })
+
           } else { // if clicked cancel confirm_msg returns false
             return false; // Keep clicked feature
           }
