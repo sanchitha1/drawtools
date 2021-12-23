@@ -257,7 +257,8 @@ $.ajax({
         }
       }
     }
-    load_features = new ol.format.GeoJSON().readFeatures(data);
+    load_features = new ol.format.GeoJSON().readFeatures(data); // reading returned data from the ajax request
+    console.log(load_features); // for debugging 
     // View
     var myview = new ol.View({
       projection: 'EPSG:4326',
