@@ -436,17 +436,9 @@ function save_features_db() {
         name_of_geom: name, // new variables for passing data
         string_of_geom: geom // new variables for passing data
       },
-      success: function(result_data) { // if the data passing is successsful, then functiopn for returning data
-        var result = JSON.parse(result_data); // converting returning data in to it's original state, String to --> Object form
-        console.log(result_data); // For debuging purposes
-        console.log(result); // For debuging purposes
-        if (result.status_code == 200) { // Checking the status code
-          alert("Data added successfully");
-          console.log("Data added successfully")
-        } else {
-          alert("Data was not added");
-          console.log("Data was not added successfully")
-        }
+      success: function() {
+        alert("Feature added successfully!");
+        console.log("Feature added successfully!");
       }
     })
   } else {
