@@ -20,7 +20,8 @@ var selected_geom_type;
 var edit_geom_type;
 var feature; // Clicked feature on function to find clicked geometry
 var drawn_feature; // drawn feature after the feature is added to the map
-var load_features;
+var updated_feature; // updated feature after the feature is updated on the map
+var load_features; // loaded feature after the feature is loaded on the map
 var f_id;
 // Custom Control
 $.ajax({
