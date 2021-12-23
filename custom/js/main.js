@@ -342,6 +342,8 @@ $.ajax({
         console.log(type);
         selected_geom_type = type;
         console.log(selected_geom_type);
+        var f_id = feature.getProperties().id; // getting feature_id
+        console.log(f_id);
       };
     });
 
