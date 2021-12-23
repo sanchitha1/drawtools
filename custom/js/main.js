@@ -258,17 +258,9 @@ $.ajax({
               data: {
                 id_of_feature: f_id, // new variables for passing data
               },
-              success: function(result_data) { // if the data passing is successsful, then functiopn for returning data
-                var result = JSON.parse(result_data); // converting returning data in to it's original state, String to --> Object form
-                console.log(result_data); // For debuging purposes
-                console.log(result); // For debuging purposes
-                if (result.status_code == 300) { // Checking the status code
-                  alert("Feature deleted successfully");
-                  console.log("Feature deleted successfully")
-                } else {
-                  alert("Feature was not deleted");
-                  console.log("Feature was not deleted successfully")
-                }
+              success: function() {
+                alert("Feature deleted successfully!");
+                console.log("Feature deleted successfully!")
               }
             })
 
