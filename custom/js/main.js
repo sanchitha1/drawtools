@@ -461,3 +461,46 @@ function change_modal_button() { // function to change the modal button
   document.getElementById("button_save").innerText = 'Update Feature'; // Changing the button name
   document.getElementById("button_save").setAttribute('onclick', 'update_features_db()'); // Setting attributes to the button
 }
+
+// function to update information in to DATABASE
+function update_features_db() {
+  // define geoJSON format convertor
+  var geo_JSON_format = new ol.format.GeoJSON();
+
+  // use methord to convert feature to a GeoJSON object
+  var feature_Geo_JSON = geo_JSON_format.writeFeatureObject(updated_feature);
+  console.log("Converted the feature to GeoJSON Object: ");
+  console.log(feature_Geo_JSON);
+
+  // Catching the type of feature to the variable
+  var type = $('#type_of_features')[0].value;
+  console.log(type);
+
+  // Catching the name of feature to the variable
+  var name = $('#name_of_feature')[0].value;
+  console.log(name);
+
+  // Converting the geometry object to a string
+  var geom = JSON.stringify(feature_Geo_JSON.geometry);
+  console.log(geom);
+
+  if (type != '') { // If type is not empty
+    $.ajax({
+      url: 'scripts/update_features.php',
+      type: 'POST', // method
+      data: {
+        type_of_geom: type, // new variables for passing data
+        name_of_geom: name, // new variables for passing data
+        string_of_geom: geom, // new variables for passing data
+        id_of_feature: f_id, // new variables for passing data
+      },
+      success: function() {
+        alert("Feature Updated successfully!");
+        console.log("Feature Updated successfully!");
+      }
+    })
+  } else {
+    alert("Please select a feature type")
+  }
+
+}
