@@ -398,6 +398,12 @@ $.ajax({
       define_type_of_features(); // Activate the function in editing mode on
       $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after editing a feature when edit mode is on
     });
+    
+    // Event is fired after the features changed
+    draw_source.on('changefeature', function(event) {
+      updated_feature = event.feature;
+      console.log(updated_feature);
+    })
 
     $('.ol-zoom-in, .ol-zoom-out').attr('data-toggle', "tooltip") // setting attributes to the Ol default buttons using jQuery
 
