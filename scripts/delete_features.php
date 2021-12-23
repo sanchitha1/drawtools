@@ -2,6 +2,7 @@
 include "../includes/init.php"; // including data base connection
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { // checking the server request methord, if that successful then below execute
+    if (isset($_POST['id_of_feature'])) { // checking if there are data exist from the POST method 
     $id = $_POST['id_of_feature']; //  POST method data type
 
     $sql = "DELETE FROM feature_drawn WHERE feature_id = :id"; // query for the record delete
