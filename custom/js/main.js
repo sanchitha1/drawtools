@@ -21,6 +21,7 @@ var edit_geom_type;
 var feature; // Clicked feature on function to find clicked geometry
 var drawn_feature; // drawn feature after the feature is added to the map
 var load_features;
+var f_id;
 // Custom Control
 $.ajax({
   type: 'POST',
