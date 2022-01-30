@@ -6,7 +6,7 @@ body {
 
 .map {
     background: rgb(192, 192, 192);
-    height: 100%;
+    height: 100vh;
 }
 
 .point-tool {
@@ -36,4 +36,37 @@ body {
 
 .tooltip-inner {
     white-space: nowrap;
+}
+
+#header nav img.logo,
+#header .nav img.logo {
+    max-height: 1.7em;
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 30px;
+}
+
+#header nav .search-bar input.tt-input,
+#header .nav .search-bar input.tt-input {
+    border-width: 0;
+    border-radius: 0px;
+    border-bottom: 1px solid #a0d1ca;
+    padding-bottom: 0;
+}
+
+#full_container .map-position {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    background-color: #759cba;
+    border-bottom: 1px solid #dbe2e9;
+    padding: 0 10px;
+    color: #dbe2e9;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+#full_container .col-sm-1 {
+    background-color: #a0d1ca;
 }
