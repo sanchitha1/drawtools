@@ -530,16 +530,30 @@ $(document).ready(function() {
 		$(this).on("click", function() {
 
 			if (check_class) {
-				sidebar_details_col.removeClass('hide');
-        controllers.css({
-          "margin-left": sidebar_width+sidebar_details_col.width()+20,
-        })
+				sidebar_details_col.removeClass('hide');        
 			} else {
 				return;
 			}
 
 		});
 	});
+
+  function toolbar_align(){
+    if(!sidebar_details_col.hasClass('hide')){
+      controllers.css({
+        "margin-left": sidebar_details_col.width(),
+    })
+    }else{
+      controllers.css({
+        "margin-left": '0px',
+      })
+    }
+  }
+
+  var intervalId = window.setInterval(function(){
+    toolbar_align();
+  }, 100);
+  
 
 	/* Dashboard Close Function */
 	$(".btn-sidebar-det-close").click(function() {
@@ -567,6 +581,7 @@ $(document).ready(function() {
 	var overview_section = $('.overview-section');
 	var save_section = $('.save-section');
 	var share_section = $('.share-section');
+  var bw_mc_section = $('.bw-mc-section');
 
   /* dashboard details expand */
   $('.dashboard-h3').click(function(){
@@ -599,24 +614,28 @@ $(document).ready(function() {
 		overview_section.removeClass('hide-section');
 		save_section.addClass('hide-section');
 		share_section.addClass('hide-section');
+    bw_mc_section.addClass('hide-section');
 	});
   /* To Be Removed */
 	$("#save-btn").click(function() {
 		save_section.removeClass('hide-section');
 		overview_section.addClass('hide-section');
 		share_section.addClass('hide-section');
+    bw_mc_section.addClass('hide-section');
 	});
   /* To Be Removed */
 	$("#share-btn").click(function() {
 		share_section.removeClass('hide-section');
 		overview_section.addClass('hide-section');
 		save_section.addClass('hide-section');
+    bw_mc_section.addClass('hide-section');
 	});
   /* To Be Removed */
 	$("#bw-mc-btn").click(function() {
-		share_section.removeClass('hide-section');
+		bw_mc_section.removeClass('hide-section');
 		overview_section.addClass('hide-section');
 		save_section.addClass('hide-section');
+    share_section.addClass('hide-section');
 	});
 	/* end: Dashboard Content Change Dummy */
 

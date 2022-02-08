@@ -1256,6 +1256,81 @@
                 </div>
               </div>
             </div>
+            <!-- survey data source -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                    <h3 class="dashboard-h3">Survey Data Source</h3>
+                  </button>
+                </h2>
+                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="survey-data-source">
+                      <div class="dashboard-details-sec">
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Reference Source Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Measurement Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Kilometers</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Survey Procedure</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Procedure 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Document Reference </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Reference 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Authorized Person NIC</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">1223456798v</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end : Overview Section -->
+
+          <!-- begin : BW MC Section -->
+          <div class="bw-mc-section">
             <!-- assessment rates -->
             <div class="accordion accordion-flush" id="accordionExample">
               <div class="accordion-item">
@@ -1264,7 +1339,7 @@
                     <h3 class="dashboard-h3">Assessment Rates</h3>
                   </button>
                 </h2>
-                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                   <div class="accordion-body">
                     <div class="assessment-rates">
                       <div class="dashboard-details-sec">
@@ -1465,79 +1540,9 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- survey data source -->
-            <div class="accordion accordion-flush" id="accordionExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                    <h3 class="dashboard-h3">Survey Data Source</h3>
-                  </button>
-                </h2>
-                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <div class="survey-data-source">
-                      <div class="dashboard-details-sec">
-                        <ul class="overview-ul">
-                          <li>
-                            <div class="row">
-                              <div class="col-md-4">
-                                <span class="attr">Reference Source Type </span>
-                              </div>
-                              <div class="col-md-8">
-                                <span class="val">Type 1</span>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="row">
-                              <div class="col-md-4">
-                                <span class="attr">Measurement Type</span>
-                              </div>
-                              <div class="col-md-8">
-                                <span class="val">Kilometers</span>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="row">
-                              <div class="col-md-4">
-                                <span class="attr">Survey Procedure</span>
-                              </div>
-                              <div class="col-md-8">
-                                <span class="val">Procedure 1</span>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="row">
-                              <div class="col-md-4">
-                                <span class="attr">Document Reference </span>
-                              </div>
-                              <div class="col-md-8">
-                                <span class="val">Reference 1</span>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="row">
-                              <div class="col-md-4">
-                                <span class="attr">Authorized Person NIC</span>
-                              </div>
-                              <div class="col-md-8">
-                                <span class="val">1223456798v</span>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </div>            
           </div>
-          <!-- end : Overview Section -->
+          <!-- end : BW MC Section Section -->
 
           <!-- begin : Dashboard Save Section -->
           <div class="save-section">
@@ -1589,23 +1594,35 @@
                 <div class="col-md-8 form-col">
                   <div class="form-check save-sec-form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label class="form-check-label" for="flexCheckDefault"> ID </label>
+                    <label class="form-check-label" for="flexCheckDefault"> Parcel Overview </label>
                   </div>
                   <div class="form-check save-sec-form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label class="form-check-label" for="flexCheckDefault"> Name </label>
+                    <label class="form-check-label" for="flexCheckDefault"> Administrative Information </label>
                   </div>
                   <div class="form-check save-sec-form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label class="form-check-label" for="flexCheckDefault"> Area </label>
+                    <label class="form-check-label" for="flexCheckDefault"> Right Information </label>
                   </div>
                   <div class="form-check save-sec-form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label class="form-check-label" for="flexCheckDefault"> Address </label>
+                    <label class="form-check-label" for="flexCheckDefault"> Survey Plan Information </label>
                   </div>
                   <div class="form-check save-sec-form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label class="form-check-label" for="flexCheckDefault"> Dimension </label>
+                    <label class="form-check-label" for="flexCheckDefault"> Assessment Rates</label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label class="form-check-label" for="flexCheckDefault"> Licenses Fees</label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label class="form-check-label" for="flexCheckDefault"> Taxation</label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label class="form-check-label" for="flexCheckDefault"> Survey Data Source</label>
                   </div>
                 </div>
               </div>
@@ -2947,6 +2964,92 @@
             </div>
             <!-- end : survey plan information -->
 
+            
+
+            <!-- begin : survey data source -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                    <h3 class="dashboard-h3">Survey Data Source</h3>
+                  </button>
+                </h2>
+                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <form action="">
+                      <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
+                      <div class="survey-data-source">
+                        <div class="dashboard-details-sec">
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Reference Source Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Measurement Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Survey Procedure</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Document Reference </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Authorized Person NIC</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end : survey data source -->
+          </div>
+          <!-- end : Overview Section -->
+          
+          <!-- begin : BW MC Section -->
+          <div class="bw-mc-section">
             <!-- begin : assessment rates -->
             <div class="accordion accordion-flush" id="accordionExample">
               <div class="accordion-item">
@@ -2955,7 +3058,7 @@
                     <h3 class="dashboard-h3">Assessment Rates</h3>
                   </button>
                 </h2>
-                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                   <div class="accordion-body">
                     <form action="">
                       <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
@@ -3182,89 +3285,10 @@
                 </div>
               </div>
             </div>
-            <!-- end : taxation -->
-
-            <!-- begin : survey data source -->
-            <div class="accordion accordion-flush" id="accordionExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                    <h3 class="dashboard-h3">Survey Data Source</h3>
-                  </button>
-                </h2>
-                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <form action="">
-                      <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
-                      <div class="survey-data-source">
-                        <div class="dashboard-details-sec">
-                          <ul class="overview-ul">
-                            <li>
-                              <div class="row">
-                                <div class="col-md-4">
-                                  <span class="attr">Reference Source Type </span>
-                                </div>
-                                <div class="col-md-8">
-                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="row">
-                                <div class="col-md-4">
-                                  <span class="attr">Measurement Type</span>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" value="PID 789" />
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="row">
-                                <div class="col-md-4">
-                                  <span class="attr">Survey Procedure</span>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" value="PID 789" />
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="row">
-                                <div class="col-md-4">
-                                  <span class="attr">Document Reference </span>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" value="PID 789" />
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="row">
-                                <div class="col-md-4">
-                                  <span class="attr">Authorized Person NIC</span>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" value="PID 789" />
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- end : survey data source -->
+            <!-- end : taxation -->          
           </div>
-          <!-- end : Overview Section -->
+          <!-- end : BW MC Section Section -->
+
         </div>
       </div>
 
