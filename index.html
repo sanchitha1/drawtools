@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>InfoBhoomi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
     <!-- Openlayers CSS -->
-    <link rel="stylesheet" href="./assets/css/ol.css">
+    <link rel="stylesheet" href="./assets/css/ol.css" />
     <!-- Style CSS -->
-    <link rel="stylesheet" href="./custom/css/style.css">
+    <link rel="stylesheet" href="./custom/css/style.css" />
     <!-- Fontawesome (button) -->
-    <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
-
+    <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css" />
     <!-- Openlayers JS -->
     <script src="./assets/js/ol.js"></script>
     <!-- jQuery js -->
@@ -24,114 +25,3285 @@
     <!-- Bootsrap JS -->
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
 
-    <title>InfoBhoomi Drawing Tools</title>
-</head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.12.0/css/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 100vh;
+        width: 100%;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.12.0/build/ol.js"></script>
 
-<body>
-    <!-- Header div start -->
-    <div id="header">
-        <!-- Navbar Start -->
-        <nav class="navbar navbar-light bg-light">
-            <ul class="nav">
-                <!-- Infobhoomi logo start -->
-                <li>
-                    <a aria-label="Infobhoomi Home" data-skip-pjax="" data-tab="welcome" href="#" title="Infobhoomi Home">
-                        <img class="logo" src="./assets/img/Logo.png">
-                    </a>
-                </li>
-                <!-- Infobhoomi logo end -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light top-nav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="./assets/img/Logo.png" class="logo-img" alt="" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse me-auto" id="navbarSupportedContent">
+          <div class="d-flex top-right">
+            <button class="btn search-btn" data-bs-toggle="modal" data-bs-target="#search-modal">Search <i class="fas fa-search" style="margin-left: 10px;"></i>
+            </button>
+            <button class="btn signin-btn" data-bs-toggle="modal" data-bs-target="#signin-modal">
+              <i class="fas fa-unlock btn-icon"></i> Sign in or register </button>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-                <!-- Search bar start -->
-                <li>
-                    <div class="search-bar noprint input-group" data-tip="search" id="nav-search">
-                        <input type="search" name="search" id="nav-search-query" value="" class="form-control tt-input" placeholder="Find an address, place, parcel # or lat/long" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;">
-                    </div>
-                </li>
-                <!-- Search bar start -->
-
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </nav>
-        <!-- Navbar End -->
+    <!-- begin: Signin Modal (popup) -->
+    <div class="modal fade" id="signin-modal" tabindex="-1" aria-labelledby="signin-modalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content signin-modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="signin-modalLabel">Sign in</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <input type="email" placeholder="Email address" class="form-control modal-form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+              </div>
+              <div class="mb-1">
+                <input type="password" placeholder="Password" class="form-control modal-form-control" id="exampleInputPassword1" />
+              </div>
+              <a href="" class="modal-links" style="float: right;">Forgot password?</a>
+            </form>
+          </div>
+          <div class="modal-footer signin-modal-footer">
+            <button type="button" class="btn btn-primary">Sign in</button>
+            <div class="signup-modal-btn">
+              <a href="signup.html" class="modal-links">No account? Sign up here!</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- Header div end -->
+    <!-- end: Signin Modal (popup) -->
 
-    <div id="full_container">
-        <!-- Map position div start -->
-        <div class="map-position-container">
-            <div class="map-position">
-                <div>
-                    <span> Current Postion:</span>
-                    <span>
-                        >
-                        <span class="active-place"> Sri lanka </span>
-                    </span>
+    <!-- begin: Search Modal (popup) -->
+    <div class="modal fade" id="search-modal" tabindex="-1" aria-labelledby="search-modal-Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="">
+              <div class="row">
+                <div class="col-md-4 search-form-label-col">
+                  <h5 class="search-form-label">Name :</h5>
                 </div>
-            </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control mb-3 search-form-input" id="name" aria-describedby="nameHelp" />
+                </div>
+                <div class="col-md-4 search-form-label-col">
+                  <h5 class="search-form-label">ID :</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control mb-3 search-form-input" id="id" aria-describedby="nameHelp" />
+                </div>
+                <div class="col-md-4 search-form-label-col">
+                  <h5 class="search-form-label">Province Name :</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control mb-3 search-form-input" id="province" aria-describedby="nameHelp" />
+                </div>
+                <div class="col-md-4 search-form-label-col">
+                  <h5 class="search-form-label">District Name :</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control mb-3 search-form-input" id="district" aria-describedby="nameHelp" />
+                </div>
+                <div class="col-md-4 search-form-label-col">
+                  <h5 class="search-form-label">MC Name :</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control mb-3 search-form-input" id="mc" aria-describedby="nameHelp" />
+                </div>
+                <div class="col-md-4 search-form-label-col">
+                  <h5 class="search-form-label">Parcel ID :</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control mb-3 search-form-input" id="parcel" aria-describedby="nameHelp" />
+                </div>
+                <div class="col-md-4 search-form-label-col">
+                  <h5 class="search-form-label">Acc NO :</h5>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control mb-3 search-form-input" id="acc" aria-describedby="nameHelp" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer search-modal-footer">
+            <button type="button" class="btn btn-primary">Search Now</button>
+          </div>
         </div>
-        <!-- Map position div end -->
-
-        <!-- Catelogue,dashboard,map div start -->
-        <div class="row sitecontrol-container">
-
-            <!-- Catelogue nav bar start-->
-            <nav class="col-sm-1">
-
-            </nav>
-            <!-- Catelogue nav bar end -->
-
-            <!-- Dashboard div start -->
-            <div class="col-sm-2">
-
-            </div>
-            <!-- Dashboard div end -->
-
-            <!-- Map Div start -->
-            <div class="col-sm-9 map" id="mymap">
-            </div>
-            <!-- Map Div end-->
-
-        </div>
-        <!-- Catelogue,dashboard,map div end -->
+      </div>
     </div>
-
+    <!-- end: Search Modal (popup) -->
 
     <!-- begin: Enter Information Modal -->
     <div class="modal fade" id="enter_information_modal" tabindex="-1" aria-labelledby="enter_information_modal_label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="enter_information_modal_label">Enter Feature Information</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- begin: Input -->
-                    <div class="mb-3">
-                        <label for="type_of_features" class="form-label">Type of Feature</label>
-                        <select id="type_of_features" class="form-select">
-
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="name_of_feature" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name_of_feature" aria-describedby="textHelp">
-                        <div id="textHelp" class="form-text">Address, Name & Etc...</div>
-                    </div>
-                    <!-- end: Input -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="button_save" type="button" class="btn btn-primary" onclick="save_features_db()">Save Feature</button>
-                </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="enter_information_modal_label">Enter Feature Information</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- begin: Input -->
+            <div class="mb-3">
+              <label for="type_of_features" class="form-label">Type of Feature</label>
+              <select id="type_of_features" class="form-select"></select>
             </div>
+            <div class="mb-3">
+              <label for="name_of_feature" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name_of_feature" aria-describedby="textHelp" />
+              <div id="textHelp" class="form-text">Address, Name & Etc...</div>
+            </div>
+            <!-- end: Input -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="button_save" type="button" class="btn btn-primary" onclick="save_features_db()">Save Feature</button>
+          </div>
         </div>
+      </div>
     </div>
     <!-- end: Enter Information Modal -->
 
-    <!-- Main js -->
-    <script src="./custom/js/main.js"></script>
-</body>
+    <!-- begin: Current Location Breadcrumb -->
+    <div class="container-fluid breadcrumb-section">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li>
+            <span class="current-location-main-txt">Current location: </span>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#">Sri Lanka</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href=""> Badulla</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            <a href="">Nes Perce</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <!-- end: Current Location Breadcrumb -->
 
+    <!-- begin: Page Body Content (Sidebar, Dashboard and Map) -->
+    <main class="main-body">
+      <!-- Catelogue / Sidebar Menu Section-->
+      <div class="d-flex flex-column flex-shrink-0 text-white bg-dark sidebar-col">
+        <ul class="nav nav-pills flex-column mb-auto sidebar-ul">
+          <li class="nav-item sidebar-list-item">
+            <button href="#" id="overview-btn" class="nav-link text-white" aria-current="page">
+              <i class="fas fa-map-marked-alt sidebar-li-icon"></i> Overview </button>
+          </li>
+          <li class="nav-item sidebar-list-item">
+            <button href="#" id="bw-mc-btn" class="nav-link text-white" aria-current="page">
+              <i class="fas fa-globe sidebar-li-icon"></i> BW MC </button>
+          </li>
+          <li class="nav-item sidebar-list-item">
+            <button href="#" id="save-btn" class="nav-link text-white">
+              <i class="fas fa-save sidebar-li-icon"></i> Save </button>
+          </li>
+          <li class="nav-item sidebar-list-item">
+            <button href="" id="share-btn" class="nav-link text-white">
+              <i class="fas fa-share sidebar-li-icon"></i> Share </button>
+          </li>
+        </ul>
+      </div>
+      <!-- Dashboard -->
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar-details-col hide">
+        <small class="boundary-text">Boundary</small>
+        <div class="sidebar-det-top-sec">
+          <h6 class="boundary-title">Badulla</h6>
+          <button class="btn btn-sidebar-det-close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="sidebar-det-list-sec users-view">
+
+          <!-- begin : Overview Section -->
+          <div class="overview-section">
+            <div class="top-img-sec">
+              <img src="images/land.jpg" class="w-100" alt="" />
+            </div>
+            <!-- parcel overview -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <h3 class="dashboard-h3">Parcel Overview</h3>
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="parcel-overview">
+                      <!-- Parcel Overview -> Parcel Information-->
+                      <div class="parcel-information dashboard-details-sec">
+                        <h4 class="dashboard-h4">
+                          <i class="fas fa-star-of-life"></i>Parcel Information
+                        </h4>
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Parcel ID </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">PID 98236</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Assessment ID </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">34536</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Name/Label </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Badulla</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Address </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Bandarawela Road, Badulla</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Dimension Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Dimension t 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Area </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">200 square miles</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Area Unit Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">square miles</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Area Source Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Source Type 2</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Reference Point(GM Point) </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">automated</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Surface Relation </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">relation type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Land Use Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">sl landuse type</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Sketch Reference </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">sketch reference1</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- Parcel Overview -> Land Information-->
+                      <div class="land-information dashboard-details-sec">
+                        <h4 class="dashboard-h4">
+                          <i class="fas fa-star-of-life"></i>Land Information
+                        </h4>
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Land Unit ID </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">LUID 87</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Land Unit Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">LUTYPE 786</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Assessment ID </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">AID 345</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Development Status </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Status 23</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Access Road </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Bandarawela Road, Badulla</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Cultivation Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Tea</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Water Availability </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Available</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- Parcel Overview -> Building Information-->
+                      <div class="building-information dashboard-details-sec">
+                        <h4 class="dashboard-h4">
+                          <i class="fas fa-star-of-life"></i>Building Information
+                        </h4>
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Building Unit ID </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">123456</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Building Unit Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Building UT 200</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Household Name</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Kamal Sunimal Bandara</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Power Status </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">ps 345</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Water Drink </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Water Drink 456</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Water Other </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Water Other 6</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Telephone </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">0456789136</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Internet </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Wired</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Sanitation</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Sanitation-1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Roof Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Solar Roof</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Wall Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Wall Type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Build Approval Status </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Status 3</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- Parcel Overview -> Group Unit Information-->
+                      <div class="group-unit-information dashboard-details-sec">
+                        <h4 class="dashboard-h4">
+                          <i class="fas fa-star-of-life"></i>Group Unit Information
+                        </h4>
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Parcel ID </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">PID 789</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Label </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Label 0002</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Relationship </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Relationship 0201</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- administrative information -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <h3 class="dashboard-h3">Administrative Information</h3>
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="administrative-information">
+                      <!-- Administrative information -> Basic Administrative Information-->
+                      <div class="basic-administrative-information dashboard-details-sec">
+                        <h4 class="dashboard-h4">
+                          <i class="fas fa-star-of-life"></i>Basic Administrative Information
+                        </h4>
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Administrative Unit ID</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">AUID 01</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Basic Administrative Unit Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">BAUT 09</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">SLMC Administrative Unit Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">SLMCAUT01</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Province</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Uva</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">District</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Badulla</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">DS Division</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">DSD001</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">GN Division</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">GND 002</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- Administrative information -> Administrative Source Information-->
+                      <div class="administrative-source-information dashboard-details-sec">
+                        <h4 class="dashboard-h4">
+                          <i class="fas fa-star-of-life"></i>Administrative Source Information
+                        </h4>
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">LID/BID</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">777555</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Document No</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">987</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Document Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">dt 01</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Availability Status</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Not-Available</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Description</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, tempore sunt magnam dolor fugit rerum laboriosam placeat praesentium voluptate totam quos at vel quia, repellendus magni! Magnam, ea suscipit. Quos. </span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Date Of Acceptance</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">2023/12/15</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">External Archive Reference</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">EAR 001</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Lifespan Stamp</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">2023/12/15</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- Administrative information -> Administrative Relationship Information-->
+                      <div class="administrative-relationship-information dashboard-details-sec">
+                        <h4 class="dashboard-h4">
+                          <i class="fas fa-star-of-life"></i>Administrative Relationship Information
+                        </h4>
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Administrative Unit ID</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">aui 012</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Relationship</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Relationship 1</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- right information -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <h3 class="dashboard-h3">Right Information</h3>
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="right-information">
+                      <!-- Right information -> Nature of Rights-->
+                      <div class="nature-of-rights dashboard-details-sec">
+                        <h4 class="dashboard-h4">
+                          <i class="fas fa-star-of-life"></i>Nature Of Rights
+                        </h4>
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Right ID </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">1864236</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Right Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Right Type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Description</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate soluta aut error beatae quibusdam! Consequatur ipsam voluptatibus accusamus a accusantium, quos iure voluptate aperiam et neque perferendis, atque eveniet itaque. </span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Share </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Share via 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Share Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Share Type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Reference Point(GM Point) </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">automated</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Surface Relation </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">relation type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Land Use Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">sl landuse type</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Sketch Reference </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">sketch reference1</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- Right information -> Person's Information -->
+                      <div class="persons-information dashboard-details-sec">
+                        <h4 class="dashboard-h4">
+                          <i class="fas fa-star-of-life"></i>Persons Information
+                        </h4>
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">NIC</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">976512356v</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Name</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Kamal Bandara</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">TP</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">0572645789</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Email</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">kamalbandara@gmail.com</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Person Role</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Person Role 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Person Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Person Type 3</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Organization</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Organization 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">External Person ID</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">ep 456789</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Person's group name </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Group 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Person's group type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- Right information -> Land User Information -->
+                      <div class="land-user-information dashboard-details-sec">
+                        <h4 class="dashboard-h4">
+                          <i class="fas fa-star-of-life"></i>Land User Information
+                        </h4>
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">LID/BID</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">18866</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Name</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Kamal Bandara</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">NIC</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">97652641v</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Telephone</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">011256891</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">No. Of Independent</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">6</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Gender</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Male</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Occupation</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Teacher</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Education</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Education 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Religion</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Buddhist</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Race</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Sri Lankan</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Married Status</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Unmarried</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Differently Abled</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Health Status</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Health Status 1</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- survey plan information -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    <h3 class="dashboard-h3">Survey Plan Information</h3>
+                  </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="survey-plan-information">
+                      <div class="dashboard-details-sec">
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Plan No</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">851264</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Date of Acceptance</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">2022/04/02</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Surveyor's Name</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Kamal Bandara</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Plan Approval Status</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Status 1</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- assessment rates -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    <h3 class="dashboard-h3">Assessment Rates</h3>
+                  </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="assessment-rates">
+                      <div class="dashboard-details-sec">
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Annual Value</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">156,152,120</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Assessment No </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">789</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Percentage</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">15.25%</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Annual Assessment Fee</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">123,850,150</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Date Of Valuation</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">2022/05/15</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Property Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- licenses fees -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                    <h3 class="dashboard-h3">Licenses Fees</h3>
+                  </button>
+                </h2>
+                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="licenses-fees">
+                      <div class="dashboard-details-sec">
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Assessment No</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">65845</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Licenses Category</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Category87</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Annual Value</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">78,000</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Licenses Fee</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">869,000</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- taxation -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                    <h3 class="dashboard-h3">Taxation</h3>
+                  </button>
+                </h2>
+                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="taxation">
+                      <div class="dashboard-details-sec">
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Plan No</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">plan 0001</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Annual Value</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">200,000</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Tax Date</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">2022/05/13</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Tax Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Amount</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">50,000</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- survey data source -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                    <h3 class="dashboard-h3">Survey Data Source</h3>
+                  </button>
+                </h2>
+                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="survey-data-source">
+                      <div class="dashboard-details-sec">
+                        <ul class="overview-ul">
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Reference Source Type </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Type 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Measurement Type</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Kilometers</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Survey Procedure</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Procedure 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Document Reference </span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">Reference 1</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <span class="attr">Authorized Person NIC</span>
+                              </div>
+                              <div class="col-md-8">
+                                <span class="val">1223456798v</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end : Overview Section -->
+
+          <!-- begin : Dashboard Save Section -->
+          <div class="save-section">
+            <form action="">
+              <div class="row form-row">
+                <div class="col-md-4 form-label-col form-col">
+                  <h5 class="label">Parcel Level Type</h5>
+                </div>
+                <div class="col-md-8 form-col">
+                  <select class="form-select form-input" aria-label="Default select example">
+                    <option selected>Parcel Level 1</option>
+                    <option value="1">Parcel Level 2</option>
+                    <option value="2">Parcel Level 3</option>
+                    <option value="3">Parcel Level 4</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row form-row">
+                <div class="col-md-4 form-label-col form-col">
+                  <h5 class="label">Layer Types</h5>
+                </div>
+                <div class="col-md-8 form-col">
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
+                    <label class="form-check-label" for="flexCheckDefault1"> Layer Type 1 </label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
+                    <label class="form-check-label" for="flexCheckDefault2"> Layer Type 2 </label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" />
+                    <label class="form-check-label" for="flexCheckDefault3"> Layer Type 3 </label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4" />
+                    <label class="form-check-label" for="flexCheckDefault4"> Layer Type 4 </label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5" />
+                    <label class="form-check-label" for="flexCheckDefault5"> Layer Type 5 </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-row">
+                <div class="col-md-4 form-label-col form-col">
+                  <h5 class="label">Attributes :</h5>
+                </div>
+                <div class="col-md-8 form-col">
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label class="form-check-label" for="flexCheckDefault"> ID </label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label class="form-check-label" for="flexCheckDefault"> Name </label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label class="form-check-label" for="flexCheckDefault"> Area </label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label class="form-check-label" for="flexCheckDefault"> Address </label>
+                  </div>
+                  <div class="form-check save-sec-form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label class="form-check-label" for="flexCheckDefault"> Dimension </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-row">
+                <div class="col-md-4 form-label-col form-col">
+                  <h5 class="label">File Format :</h5>
+                </div>
+                <div class="col-md-8 form-col">
+                  <div class="form-check save-sec-form-check form-check-inline">
+                    <input class="form-check-input radio-check" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
+                    <label class="form-check-label" for="exampleRadios1"> pdf </label>
+                  </div>
+                  <div class="form-check save-sec-form-check form-check-inline">
+                    <input class="form-check-input radio-check" type="radio" name="exampleRadios" id="exampleRadios2" value="option1" checked />
+                    <label class="form-check-label" for="exampleRadios2"> excel </label>
+                  </div>
+                  <div class="form-check save-sec-form-check form-check-inline">
+                    <input class="form-check-input radio-check" type="radio" name="exampleRadios" id="exampleRadios3" value="option1" checked />
+                    <label class="form-check-label" for="exampleRadios3"> text file </label>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-save">Print/Save</button>
+            </form>
+          </div>
+          <!-- end : Dashboard Save Section -->
+
+          <!-- begin : Dashboard Share Section -->
+          <div class="share-section">
+            <div class="row g-2">
+              <div class="col-md-6 social-share-btn">
+                <a class="btn" href="">
+                  <i class="far fa-envelope share-icons"></i>
+                  <br />
+                  <span>Email</span>
+                </a>
+              </div>
+              <div class="col-md-6 social-share-btn">
+                <a class="btn" href="">
+                  <i class="fab fa-facebook-f share-icons"></i>
+                  <br />
+                  <span>Facebook</span>
+                </a>
+              </div>
+              <div class="col-md-6 social-share-btn">
+                <a class="btn" href="">
+                  <i class="fab fa-whatsapp share-icons"></i>
+                  <br />
+                  <span>Whatsapp</span>
+                </a>
+              </div>
+              <div class="col-md-6 social-share-btn">
+                <a class="btn" href="">
+                  <i class="fab fa-youtube share-icons"></i>
+                  <br />
+                  <span>Youtube</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- end : Dashboard Share Section -->
+        </div>
+
+        <!-- Show when using by admin role -->
+        <div class="sidebar-det-list-sec admin-view">
+
+          <!-- begin : Overview Section -->
+          <div class="overview-section">
+            <div class="top-img-sec">
+              <img src="images/land.jpg" class="w-100" alt="" />
+            </div>
+            <!-- parcel overview -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <h3 class="dashboard-h3">Parcel Overview</h3>
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="parcel-overview">
+                      <form action="">
+                        <!-- begin : Parcel Overview -> Parcel Information-->
+                        <div class="parcel-information dashboard-details-sec">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Parcel Information <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
+                          </h4>
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Parcel ID </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="PID 98236" placeholder="Parcel ID" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Assessment ID </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="34536" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Name/Label </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="Badulla" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Address </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="Bandarawela Road, Badulla" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Dimension Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu.</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Area </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="200 square miles" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Area Unit Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Area Source Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Reference Point(GM Point) </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="automated" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Surface Relation </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Land Use Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Sketch Reference </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="sketch reference1" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- end : Parcel Overview -> Parcel Information-->
+
+                        <!-- begin : Parcel Overview -> Land Information-->
+                        <div class="land-information dashboard-details-sec">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Land Information
+                          </h4>
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Land Unit ID </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="sketch reference1" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Land Unit Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Assessment ID </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="sketch reference1" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Development Status </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                                    <label class="form-check-label" for="inlineRadio2">No</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Access Road </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option1" />
+                                    <label class="form-check-label" for="inlineRadio3">Yes</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option2" />
+                                    <label class="form-check-label" for="inlineRadio4">No</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Cultivation Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="sketch reference1" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Water Availability </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option1" />
+                                    <label class="form-check-label" for="inlineRadio5">Yes</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="option2" />
+                                    <label class="form-check-label" for="inlineRadio6">No</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- end : Parcel Overview -> Land Information-->
+
+                        <!-- begin : Parcel Overview -> Building Information-->
+                        <div class="building-information dashboard-details-sec">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Building Information
+                          </h4>
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Building Unit ID </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="123456" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Building Unit Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Household Name</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="val" value="Kamal Sunimal Bandara" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Power Status </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Water Drink </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Water Other </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Telephone </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio7" value="option1" />
+                                    <label class="form-check-label" for="inlineRadio7">Yes</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio8" value="option2" />
+                                    <label class="form-check-label" for="inlineRadio8">No</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Internet </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio9" value="option1" />
+                                    <label class="form-check-label" for="inlineRadio9">Yes</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio10" value="option2" />
+                                    <label class="form-check-label" for="inlineRadio10">No</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Sanitation</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Roof Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Wall Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Build Approval Status </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio11" value="option1" />
+                                    <label class="form-check-label" for="inlineRadio11">Yes</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio12" value="option2" />
+                                    <label class="form-check-label" for="inlineRadio12">No</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- end : Parcel Overview -> Building Information-->
+
+                        <!-- begin : Parcel Overview -> Group Unit Information-->
+                        <div class="group-unit-information dashboard-details-sec">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Group Unit Information
+                          </h4>
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Parcel ID </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Label </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Relationship </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- end : Parcel Overview -> Group Unit Information -->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- begin : administrative information -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <h3 class="dashboard-h3">Administrative Information</h3>
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="administrative-information">
+                      <form action="">
+                        <!-- begin : Administrative information -> Basic Administrative Information-->
+                        <div class="basic-administrative-information dashboard-details-sec">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Basic Administrative Information <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
+                          </h4>
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Administrative Unit ID</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Basic Administrative Unit Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">SLMC Administrative Unit Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Province</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">District</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">DS Division</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">GN Division</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- end : Administrative information -> Basic Administrative Information-->
+
+                        <!-- begin : Administrative information -> Administrative Source Information-->
+                        <div class="administrative-source-information dashboard-details-sec">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Administrative Source Information
+                          </h4>
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">LID/BID</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Document No</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Document Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Availability Status</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Description</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Date Of Acceptance</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">External Archive Reference</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Lifespan Stamp</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- begin : Administrative information -> Administrative Source Information-->
+
+                        <!-- begin : Administrative information -> Administrative Relationship Information-->
+                        <div class="administrative-relationship-information dashboard-details-sec">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Administrative Relationship Information
+                          </h4>
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Administrative Unit ID</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Relationship</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- end : Administrative information -> Administrative Relationship Information-->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end : administrative information -->
+
+            <!-- begin : right information -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <h3 class="dashboard-h3">Right Information</h3>
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="right-information">
+                      <form action="">
+                        <!-- begin : Right information -> Nature of Rights -->
+                        <div class="nature-of-rights dashboard-details-sec">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Nature Of Rights <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
+                          </h4>
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Right ID </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Right Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Description</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Share </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Share Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Reference Point(GM Point) </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Surface Relation </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Land Use Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Sketch Reference </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- end : Right information -> Nature of Rights -->
+
+                        <!-- begin : Right information -> Person's Information -->
+                        <div class="persons-information dashboard-details-sec">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Persons Information
+                          </h4>
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">NIC</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Name</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">TP</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Email</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Person Role</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Person Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Organization</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">External Person ID</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Person's group name </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Person's group type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- end : Right information -> Person's Information -->
+
+                        <!-- begin : Right information -> Land User Information -->
+                        <div class="land-user-information dashboard-details-sec">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Land User Information
+                          </h4>
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">LID/BID</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Name</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">NIC</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Telephone</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">No. Of Independent</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Gender</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Occupation</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Education</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Religion</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Race</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Married Status</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Differently Abled</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Health Status</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- end : Right information -> Land User Information -->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end : right information -->
+
+            <!-- begin : survey plan information -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    <h3 class="dashboard-h3">Survey Plan Information</h3>
+                  </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <form action="">
+                      <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
+                      <div class="survey-plan-information">
+                        <div class="dashboard-details-sec">
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Plan No</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Date of Acceptance</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Surveyor's Name</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Plan Approval Status</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio13" value="option1" />
+                                    <label class="form-check-label" for="inlineRadio13">Yes</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio14" value="option2" />
+                                    <label class="form-check-label" for="inlineRadio14">No</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end : survey plan information -->
+
+            <!-- begin : assessment rates -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    <h3 class="dashboard-h3">Assessment Rates</h3>
+                  </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <form action="">
+                      <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
+                      <div class="assessment-rates">
+                        <div class="dashboard-details-sec">
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Annual Value</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Assessment No </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Percentage</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Annual Assessment Fee</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio15" value="option1" />
+                                    <label class="form-check-label" for="inlineRadio15">Yes</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio16" value="option2" />
+                                    <label class="form-check-label" for="inlineRadio16">No</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Date Of Valuation</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Property Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end : assessment rates -->
+
+            <!-- begin : licenses fees -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                    <h3 class="dashboard-h3">Licenses Fees</h3>
+                  </button>
+                </h2>
+                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <form action="">
+                      <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
+                      <div class="licenses-fees">
+                        <div class="dashboard-details-sec">
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Assessment No</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Licenses Category</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Annual Value</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Licenses Fee</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end : licenses fees -->
+
+            <!-- begin : taxation -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                    <h3 class="dashboard-h3">Taxation</h3>
+                  </button>
+                </h2>
+                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <form action="">
+                      <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
+                      <div class="taxation">
+                        <div class="dashboard-details-sec">
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Plan No</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Annual Value</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Tax Date</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Tax Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Amount</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end : taxation -->
+
+            <!-- begin : survey data source -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                    <h3 class="dashboard-h3">Survey Data Source</h3>
+                  </button>
+                </h2>
+                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <form action="">
+                      <button class="btn dashboard-form-submit-btn" type="submit">Save</button>
+                      <div class="survey-data-source">
+                        <div class="dashboard-details-sec">
+                          <ul class="overview-ul">
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Reference Source Type </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Measurement Type</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Survey Procedure</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Document Reference </span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <span class="attr">Authorized Person NIC</span>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" value="PID 789" />
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end : survey data source -->
+          </div>
+          <!-- end : Overview Section -->
+        </div>
+      </div>
+
+      <!-- begin : Map Section -->
+      <div class="d-flex flex-column flex-shrink-0 text-white bg-dark map-section" id="mymap">
+        <div id="map" class="map"></div>
+      </div>
+      <!-- end : Map Section -->
+
+    </main>
+    <!-- end: Page Body Content (Sidebar, Dashboard and Map) -->
+
+    <script src="./custom/js/main.js"></script>
+
+    <script type="text/javascript">
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([37.41, 8.82]),
+          zoom: 4
+        })
+      });
+    </script>
+
+    <script>
+      /* Change Dashboard Content When URL Has "admin" param (...index.html?role=admin) */
+      if (window.location.href.indexOf("admin") > -1) {
+        document.querySelector(".users-view").style.display = "none";
+        document.querySelector(".admin-view").style.display = "";
+      } else {
+        document.querySelector(".admin-view").style.display = "none";
+        document.querySelector(".users-view").style.display = "";
+      }
+    </script>
+
+  </body>
 </html>
