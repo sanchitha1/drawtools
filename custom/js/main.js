@@ -514,6 +514,7 @@ $(document).ready(function() {
 	var btns = document.getElementsByClassName("nav-link");
   var check_class = sidebar_details_col.hasClass('hide');
   var controllers = $('.ol-control');
+  var toolbar = $('.map-toolbar-sec');
 
 	/* Map Section Positioning */
 	map_section.css({
@@ -539,20 +540,29 @@ $(document).ready(function() {
 	});
 
   function toolbar_align(){
+    $('.tool-btn').css({
+      "height":controllers.height(),
+    });
     if(!sidebar_details_col.hasClass('hide')){
       controllers.css({
         "margin-left": sidebar_details_col.width(),
-    })
+      });
+      toolbar.css({
+        "margin-left": sidebar_details_col.width()+controllers.width()+25,
+      });
     }else{
       controllers.css({
         "margin-left": '0px',
-      })
+      });
+      toolbar.css({
+        "margin-left": '50px',
+      });
     }
   }
 
   var intervalId = window.setInterval(function(){
     toolbar_align();
-  }, 100);
+  }, 10);
   
 
 	/* Dashboard Close Function */
