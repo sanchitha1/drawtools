@@ -2,7 +2,7 @@
 $host = 'localhost';
 $db = 'infobhoomi_test';
 $user = 'postgres';
-$pass = 'bandarawela';
+$pass = '123';
 $port = '5432';
 
 $dsn = "pgsql:host=$host;dbname=$db;port=$port";
