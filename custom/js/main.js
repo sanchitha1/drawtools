@@ -512,58 +512,34 @@ $(document).ready(function() {
 	var sidebar_details_col = $('.sidebar-details-col');
 	var map_section = $('.map-section');
 	var btns = document.getElementsByClassName("nav-link");
-  var check_class = sidebar_details_col.hasClass('hide');
-  var controllers = $('.ol-control');
-  var toolbar = $('.map-toolbar-sec');
+	var check_class = sidebar_details_col.hasClass('hide');
+	var controllers = $('.ol-overlaycontainer-stopevent');
+	var toolbar = $('.map-toolbar-sec');
 
 	/* Map Section Positioning */
 	map_section.css({
 		"margin-left": sidebar_width,
 	});
 
-  /* Dashboard Section Positioning */
-  sidebar_details_col.css({
-    "margin-left": sidebar_width
-  });
+	/* Dashboard Section Positioning */
+	sidebar_details_col.css({
+		"margin-left": sidebar_width
+	});
 
 	/* Dashboard Expand Function */
 	$(".nav-link").each(function(index) {
 		$(this).on("click", function() {
 
 			if (check_class) {
-				sidebar_details_col.removeClass('hide');        
+				sidebar_details_col.removeClass('hide');
 			} else {
 				return;
 			}
 
+			toolbar.addClass('go-right-toolbar');
+			$('.ol-overlaycontainer-stopevent').addClass('go-right');
 		});
 	});
-
-  function toolbar_align(){
-    $('.tool-btn').css({
-      "height":controllers.height(),
-    });
-    if(!sidebar_details_col.hasClass('hide')){
-      controllers.css({
-        "margin-left": sidebar_details_col.width(),
-      });
-      toolbar.css({
-        "margin-left": sidebar_details_col.width()+controllers.width()+25,
-      });
-    }else{
-      controllers.css({
-        "margin-left": '0px',
-      });
-      toolbar.css({
-        "margin-left": '50px',
-      });
-    }
-  }
-
-  var intervalId = window.setInterval(function(){
-    toolbar_align();
-  }, 10);
-  
 
 	/* Dashboard Close Function */
 	$(".btn-sidebar-det-close").click(function() {
@@ -573,6 +549,9 @@ $(document).ready(function() {
 		for (var i = 0; i < btns.length; i++) {
 			btns[i].classList.remove('active');
 		};
+
+		toolbar.removeClass('go-right-toolbar');
+		$('.ol-overlaycontainer-stopevent').removeClass('go-right');
 
 	});
 
@@ -591,61 +570,61 @@ $(document).ready(function() {
 	var overview_section = $('.overview-section');
 	var save_section = $('.save-section');
 	var share_section = $('.share-section');
-  var bw_mc_section = $('.bw-mc-section');
+	var bw_mc_section = $('.bw-mc-section');
 
-  /* dashboard details expand */
-  $('.dashboard-h3').click(function(){
-    var parent = this.parent();
-    console.log(parent);
-  })
+	/* dashboard details expand */
+	$('.dashboard-h3').click(function() {
+		var parent = this.parent();
+		console.log(parent);
+	})
 
-  /* Parcel Click to Open Overview & Active Sidebar Overview */
-  $('.expand-btn').click(function(){
-    overview_section.removeClass('hide-section');
-    save_section.addClass('hide-section');
+	/* Parcel Click to Open Overview & Active Sidebar Overview */
+	$('.expand-btn').click(function() {
+		overview_section.removeClass('hide-section');
+		save_section.addClass('hide-section');
 		share_section.addClass('hide-section');
 
-    if (check_class) {
-      sidebar_details_col.removeClass('hide');
-    } else {
-      return;
-    }
+		if (check_class) {
+			sidebar_details_col.removeClass('hide');
+		} else {
+			return;
+		}
 
-    for (var i = 0; i < btns.length; i++) {
+		for (var i = 0; i < btns.length; i++) {
 			btns[i].classList.remove('active');
 		};
 
-    $('#overview-btn').addClass('active');
+		$('#overview-btn').addClass('active');
 
-  });
+	});
 
-  /* To Be Removed */
+	/* To Be Removed */
 	$("#overview-btn").click(function() {
 		overview_section.removeClass('hide-section');
 		save_section.addClass('hide-section');
 		share_section.addClass('hide-section');
-    bw_mc_section.addClass('hide-section');
+		bw_mc_section.addClass('hide-section');
 	});
-  /* To Be Removed */
+	/* To Be Removed */
 	$("#save-btn").click(function() {
 		save_section.removeClass('hide-section');
 		overview_section.addClass('hide-section');
 		share_section.addClass('hide-section');
-    bw_mc_section.addClass('hide-section');
+		bw_mc_section.addClass('hide-section');
 	});
-  /* To Be Removed */
+	/* To Be Removed */
 	$("#share-btn").click(function() {
 		share_section.removeClass('hide-section');
 		overview_section.addClass('hide-section');
 		save_section.addClass('hide-section');
-    bw_mc_section.addClass('hide-section');
+		bw_mc_section.addClass('hide-section');
 	});
-  /* To Be Removed */
+	/* To Be Removed */
 	$("#bw-mc-btn").click(function() {
 		bw_mc_section.removeClass('hide-section');
 		overview_section.addClass('hide-section');
 		save_section.addClass('hide-section');
-    share_section.addClass('hide-section');
+		share_section.addClass('hide-section');
 	});
 	/* end: Dashboard Content Change Dummy */
 

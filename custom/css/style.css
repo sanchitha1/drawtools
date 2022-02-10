@@ -71,26 +71,9 @@ body {
     background-color: #005f86;
 }
 
-
-
-
-
-
-
-
-
-
-
-/* to be removed ( dummy map styles ) */
-
-.g-map{
-    width: 100vw;
-    height: 100vh;
-}
   
-/* *********** */
-  
-  
+  /* ****** */
+
   body{
     font-family: 'Public Sans', sans-serif;
   }
@@ -336,7 +319,7 @@ body {
     padding-right: 0px !important;
     border-right: 1px solid rgba(128, 128, 128, 0.137);  
     z-index: 888;
-    transition: all 0.1s;
+    transition: all 0.3s;
   }
   .sidebar-det-list-sec{
     overflow-y: auto;
@@ -433,7 +416,7 @@ body {
   }
   .hide{
     width: 0vw;
-    transition: all 0.1s;
+    transition: all 0.3s;
   }
   .map-section{
     width: 90vw;
@@ -759,25 +742,68 @@ body {
   }
   .map-toolbar-sec{
     position: absolute;
-    margin-left: 10px;
+    margin-left: 40px;
     margin-top: 10px;
-    z-index: 999;
+    z-index: 1;
+    transition: all 0.2s;
   }
   .map-toolbar-sec button{
     display: inline-flex;
     font-size: 14px;
     text-align: left;
-    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     box-shadow: 0px 0px 2px 1px rgba(255,255,255,.4);
     background-color: #6690b9;
     font-weight: 600;
     border-radius: 0px;
-    margin-right: -2px;
+    margin-right: 0px;
     border: 1px solid white;
     align-items: center;
   }
   .map-toolbar-sec button i{
     margin-right: 10px;
+  }
+  .ol-control{
+    z-index: 999;
+  }
+  .go-right{
+    margin-left: 25vw;
+    transition: all 0.1s;
+  }
+  .go-right-toolbar{
+    margin-left: 27vw;
+    transition: all 0.1s;
+  }
+  .ol-overlaycontainer-stopevent{
+    z-index: 999;
+  }
+  .dropdown-toggle::after{
+    margin-left: 10px;
+  }
+  .dropdown-menu{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 15px;
+    width: 25vw;
+    background: #005f86;
+    padding-bottom: 15px;
+    border-radius: 0px;
+  }
+  .dropdown-menu.show{
+    display: inline-flex;
+  }
+  .dropdown-menu button{
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    justify-content: center;
+  }
+  #button_point i,#button_line i,#button_polygon i,#button_start_edit i,#button_start_delete i{
+    font-size: 12px;
   }
   @media(max-width:1440px){
     .sidebar-details-col{
@@ -794,6 +820,18 @@ body {
     }
     .top-img-sec{
       height: 210px;
+    }
+    .map-toolbar-sec button{
+      font-size: 12px;
+    }
+    .map-toolbar-sec{
+      margin-left: 50px;
+    }
+    .go-right{
+      margin-left: 30vw;
+    }
+    .go-right-toolbar{
+      margin-left: 33.7vw;
     }
   }
 
@@ -812,4 +850,20 @@ body {
     .top-img-sec{
       height: 200px;
     }
+    .go-right{
+      margin-left: 30vw;
+    }
+    .go-right-toolbar{
+      margin-left: 34vw;
+    }
+    .sidebar-list-item button{
+      font-size: 14px;
+    }
+  }
+
+  @media(max-width:1024px){
+   .sidebar-list-item button{
+     padding-left: 10px !important;
+     padding-right: 10px !important;
+   }
   }
