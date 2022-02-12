@@ -114,9 +114,9 @@ $.ajax({
           map.removeInteraction(edit); // if edit mode is on, then turn it off
           flag_is_editing_mode_on = false
           document.getElementById('button_start_edit').innerHTML = '<i class="fas fa-edit"></i>' // Setting the button to initial state
-          define_type_of_features(); // Activate the function in editing mode on
-          change_modal_button(); // Activate the function to change the modal button
-          $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after editing a feature when edit mode is on
+          /*define_type_of_features(); // Activate the function in editing mode on*/
+          /*change_modal_button(); // Activate the function to change the modal button*/
+          /* $('#enter_information_modal').modal('show'); // Show form to enter the information when the button is clicked after editing a feature when edit mode is on*/
         }
       }
     }
@@ -365,33 +365,34 @@ $.ajax({
       };
     });
 
-    // function to add types of feature
-    function define_type_of_features() {
-      var drop_down_of_types = document.getElementById('type_of_features'); // Cathing HTML element with id='types_of_features' <select>
-      drop_down_of_types.innerHTML = ''; // Clearing previous values of the element before creating the <options> dynamically
-      if (selected_geom_type == 'Point') {
-        for (let i = 0; i < point_types.length; i++) {
-          var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
-          op.value = point_types[i]; //Assigning values to <option>
-          op.innerHTML = point_types[i]; //Creating HTML elements for those assigned values
-          drop_down_of_types.appendChild(op); //Appending the created <option> element as a child element of <select> 
-        }
-      } else if (selected_geom_type == 'LineString') {
-        for (let i = 0; i < line_types.length; i++) {
-          var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
-          op.value = line_types[i]; //Assigning values to <option>
-          op.innerHTML = line_types[i]; //Creating HTML elements for those assigned values
-          drop_down_of_types.appendChild(op); //Appending the created <option> element as a child element of <select> 
-        }
-      } else {
-        for (let i = 0; i < polygon_types.length; i++) {
-          var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
-          op.value = polygon_types[i]; //Assigning values to <option>
-          op.innerHTML = polygon_types[i]; //Creating HTML elements for those assigned values
-          drop_down_of_types.appendChild(op); //Appending the created <option> element as a child element of <select> 
-        }
-      }
-    }
+    /*
+        // function to add types of feature
+        function define_type_of_features() {
+          var drop_down_of_types = document.getElementById('type_of_features'); // Cathing HTML element with id='types_of_features' <select>
+          drop_down_of_types.innerHTML = ''; // Clearing previous values of the element before creating the <options> dynamically
+          if (selected_geom_type == 'Point') {
+            for (let i = 0; i < point_types.length; i++) {
+              var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
+              op.value = point_types[i]; //Assigning values to <option>
+              op.innerHTML = point_types[i]; //Creating HTML elements for those assigned values
+              drop_down_of_types.appendChild(op); //Appending the created <option> element as a child element of <select> 
+            }
+          } else if (selected_geom_type == 'LineString') {
+            for (let i = 0; i < line_types.length; i++) {
+              var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
+              op.value = line_types[i]; //Assigning values to <option>
+              op.innerHTML = line_types[i]; //Creating HTML elements for those assigned values
+              drop_down_of_types.appendChild(op); //Appending the created <option> element as a child element of <select> 
+            }
+          } else {
+            for (let i = 0; i < polygon_types.length; i++) {
+              var op = document.createElement('option'); // Creating dynamically HTML element <option> inside <select> element
+              op.value = polygon_types[i]; //Assigning values to <option>
+              op.innerHTML = polygon_types[i]; //Creating HTML elements for those assigned values
+              drop_down_of_types.appendChild(op); //Appending the created <option> element as a child element of <select> 
+            }
+          }
+        }*/
 
     // Even is fired after the feature is added to the map
     draw_source.on('addfeature', function(event) {
@@ -458,12 +459,12 @@ function save_features_db() {
 
 }
 
-function change_modal_button() { // function to change the modal button
+/*function change_modal_button() { // function to change the modal button
   document.getElementById("button_save").classList.remove('btn-primary'); // removing the button bootsrap class on button
   document.getElementById("button_save").classList.add('btn-success'); // adding the button bootsrap class on button
   document.getElementById("button_save").innerText = 'Update Feature'; // Changing the button name
   document.getElementById("button_save").setAttribute('onclick', 'update_features_db()'); // Setting attributes to the button
-}
+}*/
 
 // function to update information in to DATABASE
 function update_features_db() {
