@@ -282,10 +282,68 @@ $.ajax({
       zoom: 17
     });
 
-    // OSM Layer
-    var baseLayer = new ol.layer.Tile({
-      source: new ol.source.OSM()
-    });
+    // Base Layer
+    var baseLayer = new ol.layer.Group({
+      // A layer must have a title to appear in the layerswitcher
+      title: 'Base maps',
+      fold: 'open',
+      layers: [
+        /*new ol.layer.Group({
+          // A layer must have a title to appear in the layerswitcher
+          title: 'Water color with labels',
+          // Setting the layers type to 'base' results
+          // in it having a radio button and only one
+          // base layer being visibile at a time
+          type: 'base',
+          // Setting combine to true causes sub-layers to be hidden
+          // in the layerswitcher, only the parent is shown
+          combine: true,
+          visible: false,
+          layers: [
+            new ol.layer.Tile({
+              source: new ol.source.Stamen({
+                layer: 'watercolor'
+              })
+            }),
+            new ol.layer.Tile({
+              source: new ol.source.Stamen({
+                layer: 'terrain-labels'
+              })
+            })
+          ]
+        }),
+        new ol.layer.Tile({
+          // A layer must have a title to appear in the layerswitcher
+          title: 'Water color',
+          // Again set this layer as a base layer
+          type: 'base',
+          visible: false,
+          source: new ol.source.Stamen({
+            layer: 'watercolor'
+          })
+        }),*/
+        new ol.layer.Tile({
+          // A layer must have a title to appear in the layerswitcher
+          title: 'BingMaps',
+          // Again set this layer as a base layer
+          type: 'base',
+          visible: true,
+          source: new ol.source.BingMaps({
+            key: 'AshrP2YvBPN60emxJEFYNNNtBYcUAqEJ2J0FctgznIkRgrNnOdbPdRpbht_X7eD8',
+            imagerySet: 'AerialWithLabels'
+          })
+        }),
+        new ol.layer.Tile({
+          // A layer must have a title to appear in the layerswitcher
+          title: 'OSM',
+          // Again set this layer as a base layer
+          type: 'base',
+          visible: true,
+          source: new ol.source.OSM()
+        }),
+        
+      ]
+    })
 
     // Draw vector layer
     // 1. Define source
@@ -293,8 +351,49 @@ $.ajax({
       features: load_features
     })
     // 2. Define layer
-    var draw_layer = new ol.layer.Vector({
-      source: draw_source
+    var draw_layer = new ol.layer.Group({
+      // A layer must have a title to appear in the layerswitcher
+      title: 'Overlays',
+      // Adding a 'fold' property set to either 'open' or 'close' makes the group layer
+      // collapsible
+      fold: 'open',
+      layers: [
+        new ol.layer.Vector({
+          // A layer must have a title to appear in the layerswitcher
+          title: 'Draw Layer',
+          source: draw_source
+        }),
+        /*new ol.layer.Group({
+          // A layer must have a title to appear in the layerswitcher
+          title: 'Census',
+          fold: 'open',
+          layers: [
+            new ol.layer.Image({
+              // A layer must have a title to appear in the layerswitcher
+              title: 'Local Authority Districts December 2011 Boundaries',
+              source: new ol.source.ImageArcGISRest({
+                ratio: 1,
+                params: {
+                  LAYERS: 'show:0'
+                },
+                url: 'https://ons-inspire.esriuk.com/arcgis/rest/services/Census_Boundaries/Census_Merged_Local_Authority_Districts_December_2011_Boundaries/MapServer'
+              })
+            }),
+            new ol.layer.Image({
+              // A layer must have a title to appear in the layerswitcher
+              title: 'Wards',
+              visible: false,
+              source: new ol.source.ImageArcGISRest({
+                ratio: 1,
+                params: {
+                  LAYERS: 'show:0'
+                },
+                url: 'https://ons-inspire.esriuk.com/arcgis/rest/services/Census_Boundaries/Census_Merged_Wards_December_2011_Boundaries/MapServer'
+              })
+            })
+          ]
+        })*/
+      ]
     })
 
     // Layer Array
@@ -310,10 +409,16 @@ $.ajax({
     // Map
     var map = new ol.Map({
       target: 'mymap',
-      view: myview,
       layers: layer_array,
+      view: myview,
       controls: mycontrols,
     });
+
+    var layerSwitcher = new ol.control.LayerSwitcher({
+      tipLabel: 'Légende', // Optional label for button
+      groupSelectStyle: 'children' // Can be 'children' [default], 'group' or 'none'
+    });
+    map.addControl(layerSwitcher);
 
     select_click = new ol.interaction.Select({
       condition: ol.events.condition.click,
