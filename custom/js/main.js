@@ -481,6 +481,7 @@ $.ajax({
         console.log(g_id);
         sl_level = feature.getProperties().sl_level; // getting the administartive level
         console.log(sl_level);
+
         overview_section.removeClass('hide-section');
         save_section.addClass('hide-section');
         share_section.addClass('hide-section');
@@ -496,6 +497,11 @@ $.ajax({
         };
 
         $('#overview-btn').addClass('active');
+
+        toolbar.addClass('go-right-toolbar');
+
+        $('.ol-overlaycontainer-stopevent').addClass('go-right');
+        
       };
     });
 
