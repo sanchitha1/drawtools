@@ -463,7 +463,7 @@ $.ajax({
         console.log(type);
         selected_geom_type = type;
         console.log(selected_geom_type);
-        g_id = feature.getProperties().id; // getting feature_id
+        g_id = feature.getProperties().gid; // getting feature_id
         console.log(g_id);
         p_id = feature.getProperties().pid; // getting the administartive level
         console.log(p_id);
