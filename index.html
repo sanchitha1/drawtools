@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="./custom/css/style.css" />
     <!-- Fontawesome (button) -->
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css" />
+    <!-- LayerSwitcher CSS -->
+    <link rel="stylesheet" href="./assets/css/ol-layerswitcher.css" />
     <!-- Openlayers JS -->
     <script src="./assets/js/ol.js"></script>
     <!-- jQuery js -->
@@ -24,6 +26,9 @@
     <script src="./assets/js/jquery-ui.min.js"></script>
     <!-- Bootsrap JS -->
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <!-- LayerSwitcher js -->
+    <script src="./assets/js/ol-layerswitcher.js"></script>
+
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light top-nav">
@@ -139,16 +144,16 @@
     <!-- end: Search Modal (popup) -->
 
     <!-- begin: Enter Information Modal -->
-    <div class="modal fade" id="enter_information_modal" tabindex="-1" aria-labelledby="enter_information_modal_label" aria-hidden="true">
+    <!-- <div class="modal fade" id="enter_information_modal" tabindex="-1" aria-labelledby="enter_information_modal_label" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="enter_information_modal_label">Enter Feature Information</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
+          </div> -->
+          <!-- <div class="modal-body"> -->
             <!-- begin: Input -->
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label for="type_of_features" class="form-label">Type of Feature</label>
               <select id="type_of_features" class="form-select"></select>
             </div>
@@ -156,16 +161,16 @@
               <label for="name_of_feature" class="form-label">Name</label>
               <input type="text" class="form-control" id="name_of_feature" aria-describedby="textHelp" />
               <div id="textHelp" class="form-text">Address, Name & Etc...</div>
-            </div>
+            </div> -->
             <!-- end: Input -->
-          </div>
+          <!-- </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button id="button_save" type="button" class="btn btn-primary" onclick="save_features_db()">Save Feature</button>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- end: Enter Information Modal -->
 
     <!-- begin: BW MC Print Modal -->
@@ -276,7 +281,7 @@
       <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar-details-col hide">
         <small class="boundary-text">Boundary</small>
         <div class="sidebar-det-top-sec">
-          <h6 class="boundary-title">Badulla</h6>
+          <h6 id="p_id_" class="boundary-title">Badulla</h6>
           <button class="btn btn-sidebar-det-close">
             <i class="fas fa-times"></i>
           </button>
@@ -285,8 +290,8 @@
 
           <!-- begin : Overview Section -->
           <div class="overview-section">
-            <div class="top-img-sec">
-              <img src="images/land.jpg" class="w-100" alt="" />
+            <div class="top-img-sec" id="land_photo">
+              <!-- <img src="images/land.jpg" class="w-100" alt="" /> -->
             </div>
             <!-- parcel overview -->
             <div class="accordion accordion-flush" id="accordionExample">
@@ -305,125 +310,125 @@
                           <i class="fas fa-star-of-life"></i>Parcel Information
                         </h4>
                         <ul class="overview-ul">
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_p_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Parcel ID </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">PID 98236</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_assessment_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Assessment ID </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">34536</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_label_name_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Name/Label </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Badulla</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_address_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Address </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Bandarawela Road, Badulla</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_dimension_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Dimension Type </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Dimension t 1</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_area_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Area </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">200 square miles</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_areaunit_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Area Unit Type</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">square miles</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_areasource_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Area Source Type</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Source Type 2</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_gm_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Reference Point(GM Point) </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">automated</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_surface_relation_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Surface Relation </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">relation type 1</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_land_use_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Land Use Type </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">sl landuse type</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="p_overview_sketch_ref_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Sketch Reference </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">sketch reference1</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
                         </ul>
                       </div>
@@ -433,75 +438,75 @@
                           <i class="fas fa-star-of-life"></i>Land Information
                         </h4>
                         <ul class="overview-ul">
-                          <li>
-                            <div class="row">
+                          <li id="l_info_unit_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Land Unit ID </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">LUID 87</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="l_info_unit_type_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Land Unit Type </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">LUTYPE 786</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="l_assessment_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Assessment ID </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">AID 345</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="l_development_status_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Development Status </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Status 23</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="l_access_road_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Access Road </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Bandarawela Road, Badulla</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="l_cultivation_type_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Cultivation Type </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Tea</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="l_water_availability_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Water Availability </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Available</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
                         </ul>
                       </div>
@@ -511,125 +516,125 @@
                           <i class="fas fa-star-of-life"></i>Building Information
                         </h4>
                         <ul class="overview-ul">
-                          <li>
-                            <div class="row">
+                          <li id="b_building_unit_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Building Unit ID </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">123456</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_building_unit_type_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Building Unit Type </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Building UT 200</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_house_hold_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Household Name</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Kamal Sunimal Bandara</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_power_status_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Power Status </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">ps 345</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_water_drink_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Water Drink </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Water Drink 456</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_water_other_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Water Other </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Water Other 6</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_telephone_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Telephone </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">0456789136</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_internet_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Internet </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Wired</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_sanitation_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Sanitation</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Sanitation-1</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_roof_type_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Roof Type </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Solar Roof</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_wall_type_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Wall Type </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Wall Type 1</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="b_approval_status_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Build Approval Status </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Status 3</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
                         </ul>
                       </div>
@@ -639,17 +644,17 @@
                           <i class="fas fa-star-of-life"></i>Group Unit Information
                         </h4>
                         <ul class="overview-ul">
-                          <li>
-                            <div class="row">
+                          <li id="grp_unit_informatin_p_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Parcel ID </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">PID 789</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
+                          <!-- <li>
                             <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Label </span>
@@ -668,7 +673,7 @@
                                 <span class="val">Relationship 0201</span>
                               </div>
                             </div>
-                          </li>
+                          </li> -->
                         </ul>
                       </div>
                     </div>
@@ -693,75 +698,75 @@
                           <i class="fas fa-star-of-life"></i>Basic Administrative Information
                         </h4>
                         <ul class="overview-ul">
-                          <li>
-                            <div class="row">
+                          <li id="a_admin_unit_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Administrative Unit ID</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">AUID 01</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_admin_unit_type_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Basic Administrative Unit Type</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">BAUT 09</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_slmc_admin_type_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">SLMC Administrative Unit Type</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">SLMCAUT01</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_province_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Province</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Uva</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_district_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">District</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Badulla</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_ds_division_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">DS Division</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">DSD001</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_gn_division_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">GN Division</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">GND 002</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
                         </ul>
                       </div>
@@ -771,85 +776,85 @@
                           <i class="fas fa-star-of-life"></i>Administrative Source Information
                         </h4>
                         <ul class="overview-ul">
-                          <li>
-                            <div class="row">
+                          <li id="a_sc_l_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">LID/BID</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">777555</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_sc_doc_no_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Document No</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">987</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_sc_doc_type_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Document Type</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">dt 01</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_sc_avaliability_status_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Availability Status</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Not-Available</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_sc_description_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Description</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, tempore sunt magnam dolor fugit rerum laboriosam placeat praesentium voluptate totam quos at vel quia, repellendus magni! Magnam, ea suscipit. Quos. </span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_sc_date_acceptance_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Date Of Acceptance</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">2023/12/15</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_sc_external_archive_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">External Archive Reference</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">EAR 001</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="a_sc_lifespan_stamp_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Lifespan Stamp</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">2023/12/15</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
                         </ul>
                       </div>
@@ -859,17 +864,17 @@
                           <i class="fas fa-star-of-life"></i>Administrative Relationship Information
                         </h4>
                         <ul class="overview-ul">
-                          <li>
-                            <div class="row">
+                          <li id="a_re_unit_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Administrative Unit ID</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">aui 012</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
+                          <!-- <li>
                             <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Relationship</span>
@@ -878,7 +883,7 @@
                                 <span class="val">Relationship 1</span>
                               </div>
                             </div>
-                          </li>
+                          </li> -->
                         </ul>
                       </div>
                     </div>
@@ -903,77 +908,77 @@
                           <i class="fas fa-star-of-life"></i>Nature Of Rights
                         </h4>
                         <ul class="overview-ul">
-                          <li>
-                            <div class="row">
+                          <li id="n_right_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Right ID </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">1864236</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="n_right_type_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Right Type </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Right Type 1</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <li id="n_right_desc_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Description</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate soluta aut error beatae quibusdam! Consequatur ipsam voluptatibus accusamus a accusantium, quos iure voluptate aperiam et neque perferendis, atque eveniet itaque. </span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                          <!-- <li id="n_right_share_id"> -->
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Share </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Share via 1</span>
                               </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="row">
+                            </div> -->
+                          <!-- </li> -->
+                          <li id="n_right_share_type_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Share Type</span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">Share Type 1</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
-                            <div class="row">
+                           <li id="n_right_ref_point_id"> 
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Reference Point(GM Point) </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">automated</span>
                               </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="row">
+                            </div> -->
+                           </li>
+                          <li id="n_right_surface_relation_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Surface Relation </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">relation type 1</span>
                               </div>
-                            </div>
+                            </div> -->
                           </li>
-                          <li>
+                          <!--<li>
                             <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Land Use Type </span>
@@ -982,21 +987,21 @@
                                 <span class="val">sl landuse type</span>
                               </div>
                             </div>
-                          </li>
-                          <li>
-                            <div class="row">
+                          </li>-->
+                          <li id="n_right_sketch_ref_id">
+                            <!-- <div class="row">
                               <div class="col-md-4">
                                 <span class="attr">Sketch Reference </span>
                               </div>
                               <div class="col-md-8">
                                 <span class="val">sketch reference1</span>
                               </div>
-                            </div>
-                          </li>
+                            </div> -->
+                          </li> 
                         </ul>
                       </div>
                       <!-- Right information -> Person's Information -->
-                      <div class="persons-information dashboard-details-sec">
+                      <!-- <div class="persons-information dashboard-details-sec">
                         <h4 class="dashboard-h4">
                           <i class="fas fa-star-of-life"></i>Persons Information
                         </h4>
@@ -1102,9 +1107,9 @@
                             </div>
                           </li>
                         </ul>
-                      </div>
+                      </div> -->
                       <!-- Right information -> Land User Information -->
-                      <div class="land-user-information dashboard-details-sec">
+                      <!-- <div class="land-user-information dashboard-details-sec">
                         <h4 class="dashboard-h4">
                           <i class="fas fa-star-of-life"></i>Land User Information
                         </h4>
@@ -1240,14 +1245,14 @@
                             </div>
                           </li>
                         </ul>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <!-- survey plan information -->
-            <div class="accordion accordion-flush" id="accordionExample">
+            <!-- <div class="accordion accordion-flush" id="accordionExample">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -1305,9 +1310,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- survey data source -->
-            <div class="accordion accordion-flush" id="accordionExample">
+            <!-- <div class="accordion accordion-flush" id="accordionExample">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
@@ -1375,7 +1380,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <!-- end : Overview Section -->
 
