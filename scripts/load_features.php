@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // checking the server request metho
 
             'geometry' => json_decode($row['geojson'], true),
             'properties' => array
-            ( 
+            (
                 'sl_level' => $row['sl_level'],
                 'id' => $row['gid'],
             ),
