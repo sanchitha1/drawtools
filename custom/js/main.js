@@ -23,7 +23,7 @@ var drawn_feature; // drawn feature after the feature is added to the map
 var updated_feature; // updated feature after the feature is updated on the map
 var load_features; // loaded feature after the feature is loaded on the map
 var g_id; // New variable for gid
-var sl_level;
+var p_id;  // New variable for pid
 // Custom Control
 $.ajax({
   type: 'POST',
@@ -465,8 +465,8 @@ $.ajax({
         console.log(selected_geom_type);
         g_id = feature.getProperties().id; // getting feature_id
         console.log(g_id);
-        sl_level = feature.getProperties().sl_level; // getting the administartive level
-        console.log(sl_level);
+        p_id = feature.getProperties().pid; // getting the administartive level
+        console.log(p_id);
       };
     });
 
