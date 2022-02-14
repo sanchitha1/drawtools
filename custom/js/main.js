@@ -23,7 +23,22 @@ var drawn_feature; // drawn feature after the feature is added to the map
 var updated_feature; // updated feature after the feature is updated on the map
 var load_features; // loaded feature after the feature is loaded on the map
 var g_id; // New variable for gid
-var p_id;  // New variable for pid
+var p_id; // New variable for pid
+var sl_level;
+
+/* begin: Dashboard Content Change Dummy */
+var overview_section = $('.overview-section');
+var save_section = $('.save-section');
+var share_section = $('.share-section');
+var bw_mc_section = $('.bw-mc-section');
+var sidebar_width = $('.sidebar-col').width();
+var sidebar_details_col = $('.sidebar-details-col');
+var map_section = $('.map-section');
+var btns = document.getElementsByClassName("nav-link");
+var check_class = sidebar_details_col.hasClass('hide');
+var controllers = $('.ol-overlaycontainer-stopevent');
+var toolbar = $('.map-toolbar-sec');
+
 // Custom Control
 $.ajax({
   type: 'POST',
@@ -466,6 +481,29 @@ $.ajax({
         console.log(g_id);
         p_id = feature.getProperties().pid; // getting the administartive level
         console.log(p_id);
+        sl_level = feature.getProperties().sl_level; // getting the administartive level
+        console.log(sl_level);
+
+        overview_section.removeClass('hide-section');
+        save_section.addClass('hide-section');
+        share_section.addClass('hide-section');
+
+        if (check_class) {
+          sidebar_details_col.removeClass('hide');
+        } else {
+          return;
+        }
+
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].classList.remove('active');
+        };
+
+        $('#overview-btn').addClass('active');
+
+        toolbar.addClass('go-right-toolbar');
+
+        $('.ol-overlaycontainer-stopevent').addClass('go-right');
+
       };
     });
 
@@ -623,14 +661,6 @@ function update_features_db() {
 /* UI jquery */
 $(document).ready(function() {
 
-  var sidebar_width = $('.sidebar-col').width();
-  var sidebar_details_col = $('.sidebar-details-col');
-  var map_section = $('.map-section');
-  var btns = document.getElementsByClassName("nav-link");
-  var check_class = sidebar_details_col.hasClass('hide');
-  var controllers = $('.ol-overlaycontainer-stopevent');
-  var toolbar = $('.map-toolbar-sec');
-
   /* Map Section Positioning */
   map_section.css({
     "margin-left": sidebar_width,
@@ -681,20 +711,9 @@ $(document).ready(function() {
 
   });
 
-  /* begin: Dashboard Content Change Dummy */
-  var overview_section = $('.overview-section');
-  var save_section = $('.save-section');
-  var share_section = $('.share-section');
-  var bw_mc_section = $('.bw-mc-section');
-
-  /* dashboard details expand */
-  $('.dashboard-h3').click(function() {
-    var parent = this.parent();
-    console.log(parent);
-  })
-
   /* Parcel Click to Open Overview & Active Sidebar Overview */
   $('.expand-btn').click(function() {
+
     overview_section.removeClass('hide-section');
     save_section.addClass('hide-section');
     share_section.addClass('hide-section');
