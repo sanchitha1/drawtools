@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // checking the server request metho
     // $name = $_POST['name_of_geom']; //  POST method data type
     $string_geom = $_POST['string_of_geom']; //  POST method data type
     try {
-        $sql = "INSERT INTO parcels (geom) VALUES (ST_Multi(ST_GeomFromGeoJSON('$string_geom')))"; // query for the record inserting
+        $sql = "INSERT INTO allparcelsnew (geom) VALUES (ST_Multi(ST_GeomFromGeoJSON('$string_geom')))"; // query for the record inserting
         $query = $pdo->query($sql); // query executing
     } catch (PDOException $e) {
         echo "Error <br><br>" . $e->getMessage() . "<br>";
