@@ -341,7 +341,6 @@ $.ajax({
           visible: true,
           source: new ol.source.OSM()
         }),
-        
       ]
     })
 
