@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="./custom/css/style.css" />
     <!-- Fontawesome (button) -->
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css" />
+    <!-- LayerSwitcher CSS -->
+    <link rel="stylesheet" href="./assets/css/ol-layerswitcher.css" />
     <!-- Openlayers JS -->
     <script src="./assets/js/ol.js"></script>
     <!-- jQuery js -->
@@ -24,6 +26,9 @@
     <script src="./assets/js/jquery-ui.min.js"></script>
     <!-- Bootsrap JS -->
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <!-- LayerSwitcher js -->
+    <script src="./assets/js/ol-layerswitcher.js"></script>
+
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light top-nav">
@@ -139,16 +144,16 @@
     <!-- end: Search Modal (popup) -->
 
     <!-- begin: Enter Information Modal -->
-    <div class="modal fade" id="enter_information_modal" tabindex="-1" aria-labelledby="enter_information_modal_label" aria-hidden="true">
+    <!-- <div class="modal fade" id="enter_information_modal" tabindex="-1" aria-labelledby="enter_information_modal_label" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="enter_information_modal_label">Enter Feature Information</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
+          </div> -->
+          <!-- <div class="modal-body"> -->
             <!-- begin: Input -->
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label for="type_of_features" class="form-label">Type of Feature</label>
               <select id="type_of_features" class="form-select"></select>
             </div>
@@ -156,16 +161,16 @@
               <label for="name_of_feature" class="form-label">Name</label>
               <input type="text" class="form-control" id="name_of_feature" aria-describedby="textHelp" />
               <div id="textHelp" class="form-text">Address, Name & Etc...</div>
-            </div>
+            </div> -->
             <!-- end: Input -->
-          </div>
+          <!-- </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button id="button_save" type="button" class="btn btn-primary" onclick="save_features_db()">Save Feature</button>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- end: Enter Information Modal -->
 
     <!-- begin: BW MC Print Modal -->
