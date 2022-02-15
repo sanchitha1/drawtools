@@ -489,12 +489,12 @@ $.ajax({
             /* type_of_geom: type, // new variables for passing data
              name_of_geom: name, // new variables for passing data*/
             // id: '786'// new variables for passing data
-            id:g_id
+            id: g_id
           },
           success: function (data) {
             const allData = JSON.parse(data);
             bindAllValues(allData);
-            
+
           },
           error: function (error) {
             alert("Error Occurred Please try again.")
@@ -689,19 +689,19 @@ $(document).ready(function () {
   });
 
   /* Dashboard Expand Function */
-  $(".nav-link").each(function (index) {
-    $(this).on("click", function () {
+  // $(".nav-link").each(function (index) {
+  //   $(this).on("click", function () {
 
-      if (check_class) {
-        sidebar_details_col.removeClass('hide');
-      } else {
-        return;
-      }
+  //     if (check_class) {
+  //       sidebar_details_col.removeClass('hide');
+  //     } else {
+  //       return;
+  //     }
 
-      toolbar.addClass('go-right-toolbar');
-      $('.ol-overlaycontainer-stopevent').addClass('go-right');
-    });
-  });
+  //     toolbar.addClass('go-right-toolbar');
+  //     $('.ol-overlaycontainer-stopevent').addClass('go-right');
+  //   });
+  // });
 
   /* Dashboard Close Function */
   $(".btn-sidebar-det-close").click(function () {
@@ -714,7 +714,7 @@ $(document).ready(function () {
 
     toolbar.removeClass('go-right-toolbar');
     $('.ol-overlaycontainer-stopevent').removeClass('go-right');
-
+    g_id = undefined;
   });
 
   /* Add active class to the current button (highlight it) */
@@ -723,60 +723,67 @@ $(document).ready(function () {
     for (var i = 0; i < btns.length; i++) {
       btns[i].classList.remove('active');
     };
-
-    $(this).addClass('active');
+    if (g_id) {
+      $(this).addClass('active');
+    }
 
   });
 
   /* Parcel Click to Open Overview & Active Sidebar Overview */
-  $('.expand-btn').click(function () {
+  // $('.expand-btn').click(function () {
 
-    overview_section.removeClass('hide-section');
-    save_section.addClass('hide-section');
-    share_section.addClass('hide-section');
+  //   overview_section.removeClass('hide-section');
+  //   save_section.addClass('hide-section');
+  //   share_section.addClass('hide-section');
 
-    if (check_class) {
-      sidebar_details_col.removeClass('hide');
-    } else {
-      return;
-    }
+  //   if (check_class) {
+  //     sidebar_details_col.removeClass('hide');
+  //   } else {
+  //     return;
+  //   }
 
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].classList.remove('active');
-    };
+  //   for (var i = 0; i < btns.length; i++) {
+  //     btns[i].classList.remove('active');
+  //   };
 
-    $('#overview-btn').addClass('active');
+  //   $('#overview-btn').addClass('active');
 
-  });
+  // });
 
-  /* To Be Removed */
   $("#overview-btn").click(function () {
-    overview_section.removeClass('hide-section');
-    save_section.addClass('hide-section');
-    share_section.addClass('hide-section');
-    bw_mc_section.addClass('hide-section');
+    if (g_id) {
+      overview_section.removeClass('hide-section');
+      save_section.addClass('hide-section');
+      share_section.addClass('hide-section');
+      bw_mc_section.addClass('hide-section');
+    }
   });
-  /* To Be Removed */
   $("#save-btn").click(function () {
-    save_section.removeClass('hide-section');
-    overview_section.addClass('hide-section');
-    share_section.addClass('hide-section');
-    bw_mc_section.addClass('hide-section');
+    if (g_id) {
+      save_section.removeClass('hide-section');
+      overview_section.addClass('hide-section');
+      share_section.addClass('hide-section');
+      bw_mc_section.addClass('hide-section');
+    }
   });
-  /* To Be Removed */
   $("#share-btn").click(function () {
-    share_section.removeClass('hide-section');
-    overview_section.addClass('hide-section');
-    save_section.addClass('hide-section');
-    bw_mc_section.addClass('hide-section');
+    if (g_id) {
+      share_section.removeClass('hide-section');
+      overview_section.addClass('hide-section');
+      save_section.addClass('hide-section');
+      bw_mc_section.addClass('hide-section');
+    }
   });
-  /* To Be Removed */
   $("#bw-mc-btn").click(function () {
-    bw_mc_section.removeClass('hide-section');
-    overview_section.addClass('hide-section');
-    save_section.addClass('hide-section');
-    share_section.addClass('hide-section');
+    if (g_id) {
+      bw_mc_section.removeClass('hide-section');
+      overview_section.addClass('hide-section');
+      save_section.addClass('hide-section');
+      share_section.addClass('hide-section');
+    }
   });
   /* end: Dashboard Content Change Dummy */
+
+
 
 });
