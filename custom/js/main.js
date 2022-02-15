@@ -23,27 +23,27 @@ var drawn_feature; // drawn feature after the feature is added to the map
 var updated_feature; // updated feature after the feature is updated on the map
 var load_features; // loaded feature after the feature is loaded on the map
 var g_id; // New variable for gid
-var sl_level;
+// var sl_level;
 
- /* begin: Dashboard Content Change Dummy */
- var overview_section = $('.overview-section');
- var save_section = $('.save-section');
- var share_section = $('.share-section');
- var bw_mc_section = $('.bw-mc-section'); 
- var sidebar_width = $('.sidebar-col').width();
- var sidebar_details_col = $('.sidebar-details-col');
- var map_section = $('.map-section');
- var btns = document.getElementsByClassName("nav-link");
- var check_class = sidebar_details_col.hasClass('hide');
- var controllers = $('.ol-overlaycontainer-stopevent');
- var toolbar = $('.map-toolbar-sec');
+/* begin: Dashboard Content Change Dummy */
+var overview_section = $('.overview-section');
+var save_section = $('.save-section');
+var share_section = $('.share-section');
+var bw_mc_section = $('.bw-mc-section');
+var sidebar_width = $('.sidebar-col').width();
+var sidebar_details_col = $('.sidebar-details-col');
+var map_section = $('.map-section');
+var btns = document.getElementsByClassName("nav-link");
+var check_class = sidebar_details_col.hasClass('hide');
+var controllers = $('.ol-overlaycontainer-stopevent');
+var toolbar = $('.map-toolbar-sec');
 
 // Custom Control
 $.ajax({
   type: 'POST',
   url: 'scripts/load_features.php',
   // dataType: 'json',
-  success: function(data, status) {
+  success: function (data, status) {
     class polygon_button extends ol.control.Control {
       /**
        * @param {Object} [opt_options] Control options.
@@ -275,7 +275,7 @@ $.ajax({
               data: {
                 id_of_feature: g_id, // new variables for passing data
               },
-              success: function() {
+              success: function () {
                 alert("Feature deleted successfully!");
                 console.log("Feature deleted successfully!")
               }
@@ -355,7 +355,7 @@ $.ajax({
           visible: true,
           source: new ol.source.OSM()
         }),
-        
+
       ]
     })
 
@@ -455,19 +455,19 @@ $.ajax({
     };
 
     // function to find the clicked feature geometry type
-    map.on('click', function(evt) {
+    map.on('click', function (evt) {
       if (abort) { // if abort == true , function execution will stop
         return;
       }
       feature = map.forEachFeatureAtPixel(evt.pixel,
-        function(feature, layer) {
+        function (feature, layer) {
           if (abort) { // if abort == true , function execution will stop
             return;
           }
           return feature;
         }, {
-          hitTolerance: 8,
-        });
+        hitTolerance: 8,
+      });
       if (feature) { // if feature; exist
         if (abort) { // if abort == true , function execution will stop
           return;
@@ -479,8 +479,8 @@ $.ajax({
         console.log(selected_geom_type);
         g_id = feature.getProperties().id; // getting feature_id
         console.log(g_id);
-        sl_level = feature.getProperties().sl_level; // getting the administartive level
-        console.log(sl_level);
+        // sl_level = feature.getProperties().sl_level; // getting the administartive level
+        // console.log(sl_level);
 
         $.ajax({
           url: 'scripts/get_parcel_details.php',
@@ -488,743 +488,15 @@ $.ajax({
           data: {
             /* type_of_geom: type, // new variables for passing data
              name_of_geom: name, // new variables for passing data*/
-            id: '1'// new variables for passing data
-            // id:g_id
+            // id: '786'// new variables for passing data
+            id:g_id
           },
-          success: function(data) {
-            console.error('DATA',data)
+          success: function (data) {
             const allData = JSON.parse(data);
-            console.error('there',allData)
-            console.error(allData)
-            if(allData.landinformation && allData.landinformation.photograph !='0'){
-              $('#land_photo').html(`<img src="${allData.landinformation.photograph}" class="w-100" alt="" />`)
-            }
-            if(allData.p_id){
-              $('#p_overview_p_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Parcel ID </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.p_id}</span>
-                  </div>
-                </div>`
-              );
-              $('#grp_unit_informatin_p_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Parcel ID </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.p_id}</span>
-                  </div>
-                </div>`
-              );
-              $('#p_id_').text(allData.p_id);
-            }
-            if(allData.party && allData.party.AssessmentID){
-              $('#p_overview_assessment_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Assessment ID </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.AssessmentID}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.party && allData.party.LabeName){
-              $('#p_overview_label_name_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Name/Label </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.LabeName}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.party && allData.party.Address){
-              $('#p_overview_address_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Address </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.Address}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.party && allData.party.DimensionType){
-              $('#p_overview_dimension_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Dimension Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.DimensionType}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.party && allData.party.Area){
-              $('#p_overview_area_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Area </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.Area}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.party && allData.party.AreaUnitType){
-              $('#p_overview_areaunit_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Area Unit Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.AreaUnitType}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.party && allData.party.AreaSourceType){
-              $('#p_overview_areasource_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Area Source Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.AreaSourceType}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.party && allData.party.ReferencePoint_GMPoint){
-              $('#p_overview_gm_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Reference Point(GM Point) </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.ReferencePoint_GMPoint}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.party && allData.party.SurfaceRelation){
-              $('#p_overview_surface_relation_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Surface Relation </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.SurfaceRelation}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.party && allData.party.LandUseType){
-              $('#p_overview_land_use_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Land Use Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.LandUseType}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.party && allData.party.SketchReference){
-              $('#p_overview_sketch_ref_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Sketch Reference </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.SketchReference}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.landinformation && allData.landinformation.LandUnitIDLID){
-              $('#l_info_unit_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Land Unit ID </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.landinformation.LandUnitIDLID}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.landinformation && allData.landinformation.LandUnitType){
-              $('#l_info_unit_type_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Land Unit Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.landinformation.LandUnitType}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.landinformation && allData.landinformation.AssessmentID){
-            $('#l_assessment_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Assessment ID </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.landinformation.AssessmentID}</span>
-                  </div>
-                </div>`
-              )
-            }
-
-            if(allData.landinformation && allData.landinformation.DevelopmentStatus){
-              $('#l_development_status_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Development Status </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.landinformation.DevelopmentStatus}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.landinformation && allData.landinformation.AccessRoad){
-              $('#l_access_road_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Access Road </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.landinformation.AccessRoad}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.landinformation && allData.landinformation.CultivationType){
-              $('#l_cultivation_type_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Cultivation Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.landinformation.CultivationType}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.landinformation && allData.landinformation.WaterAvailability){
-              $('#l_water_availability_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Water Availability </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.landinformation.WaterAvailability}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.BuildingUnitIDBID){
-              $('#b_building_unit_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Building Unit ID </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.BuildingUnitIDBID}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.BuildingUnitType){
-              $('#b_building_unit_type_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Building Unit Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.BuildingUnitType}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.HouseholdNameBRName){
-              $('#b_house_hold_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Household Name </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.HouseholdNameBRName}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.PowerStatus){
-              $('#b_power_status_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Power Status </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.PowerStatus}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.WaterDrink){
-              $('#b_water_drink_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Water Drink </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.WaterDrink}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.WaterOther){
-              $('#b_water_other_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Water Other </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.WaterOther}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.Telephone){
-              $('#b_telephone_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Telephone </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.Telephone}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.Internet){
-              $('#b_internet_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Internet </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.Internet}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.Sanitation){
-              $('#b_sanitation_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Sanitation </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.Sanitation}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.Rooftype){
-              $('#b_roof_type_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Roof Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.Rooftype}</span>
-                  </div>
-                </div>`
-              );
-            }
-            if(allData.buildinginformation && allData.buildinginformation.Walltype){
-              $('#b_wall_type_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Wall Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.Walltype}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.buildinginformation && allData.buildinginformation.BuildApprovalStatus){
-              $('#b_approval_status_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Build Approval Status </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.buildinginformation.BuildApprovalStatus}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.basicadministrativeinformation && allData.basicadministrativeinformation.AdministrativeUnitID){
-              $('#a_admin_unit_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Administrative Unit ID </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.basicadministrativeinformation.AdministrativeUnitID}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.basicadministrativeinformation && allData.basicadministrativeinformation.BasicAdministrativeUnitType){
-              $('#a_admin_unit_type_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Basic Administrative Unit Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.basicadministrativeinformation.BasicAdministrativeUnitType}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.basicadministrativeinformation && allData.basicadministrativeinformation.SLMCAdministrativeUnitType){
-              $('#a_slmc_admin_type_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">SLMC Administrative Unit Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.basicadministrativeinformation.SLMCAdministrativeUnitType}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.basicadministrativeinformation && allData.basicadministrativeinformation.Province){
-              $('#a_province_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Province </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.basicadministrativeinformation.Province}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.basicadministrativeinformation && allData.basicadministrativeinformation.District){
-              $('#a_district_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">District </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.basicadministrativeinformation.District}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.basicadministrativeinformation && allData.basicadministrativeinformation.DSDivision){
-              $('#a_ds_division_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">DS Division </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.basicadministrativeinformation.DSDivision}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.basicadministrativeinformation && allData.basicadministrativeinformation.GNDivision){
-              $('#a_gn_division_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">GN Division</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.basicadministrativeinformation.GNDivision}</span>
-                  </div>
-                </div>`
-              );
-            }
+            bindAllValues(allData);
             
-            if(allData.adminsourceinformation && allData.adminsourceinformation.LIDBID){
-              $('#a_sc_l_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">LID/BID</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.adminsourceinformation.LIDBID}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.adminsourceinformation && allData.adminsourceinformation.DocumentNo){
-              $('#a_sc_doc_no_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Document No</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.adminsourceinformation.DocumentNo}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.adminsourceinformation && allData.adminsourceinformation.DocumentType){
-              $('#a_sc_doc_type_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Document Type</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.adminsourceinformation.DocumentType}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.adminsourceinformation && allData.adminsourceinformation.AvailabilityStatus){
-              $('#a_sc_avaliability_status_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Availability Status</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.adminsourceinformation.AvailabilityStatus}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.adminsourceinformation && allData.adminsourceinformation.DescriptionText){
-              $('#a_sc_description_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Description</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.adminsourceinformation.DescriptionText}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.adminsourceinformation && allData.adminsourceinformation.DateofAcceptance){
-              $('#a_sc_date_acceptance_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Date Of Acceptance</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.adminsourceinformation.DateofAcceptance}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.adminsourceinformation && allData.adminsourceinformation.ExternalArchiveReference){
-              $('#a_sc_external_archive_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">External Archive Reference</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.adminsourceinformation.ExternalArchiveReference}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.adminsourceinformation && allData.adminsourceinformation.LifespanStamp){
-              $('#a_sc_lifespan_stamp_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Lifespan Stamp</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.adminsourceinformation.LifespanStamp}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.basicadministrativeinformation && allData.basicadministrativeinformation.AdministrativeUnitID){
-              $('#a_re_unit_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Administrative Unit ID </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.basicadministrativeinformation.AdministrativeUnitID}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.natureofrights && allData.natureofrights.RightID){
-              $('#n_right_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Right ID </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.natureofrights.RightID}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.natureofrights && allData.natureofrights.RightType){
-              $('#n_right_type_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Right Type </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.natureofrights.RightType}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.natureofrights && allData.natureofrights.Description){
-              $('#n_right_desc_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Description</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.natureofrights.Description}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.party && allData.party.ReferencePoint_GMPoint){
-              $('#n_right_ref_point_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Reference Point(GM Point) </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.ReferencePoint_GMPoint}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.party && allData.party.SurfaceRelation){
-              $('#n_right_surface_relation_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Surface Relation </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.SurfaceRelation}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            if(allData.party && allData.party.SketchReference){
-              $('#n_right_sketch_ref_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Sketch Reference </span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.party.SketchReference}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            // if(allData.natureofrights && allData.natureofrights.Share_portion){
-            //   $('#n_right_share_id').html(`
-            //     <div class="row">
-            //       <div class="col-md-4">
-            //         <span class="attr">Share</span>
-            //       </div>
-            //       <div class="col-md-8">
-            //         <span class="val">${allData.natureofrights.Share_portion}</span>
-            //       </div>
-            //     </div>`
-            //   );
-            // }
-
-            if(allData.natureofrights && allData.natureofrights.ShareType){
-              $('#n_right_share_type_id').html(`
-                <div class="row">
-                  <div class="col-md-4">
-                    <span class="attr">Share Type</span>
-                  </div>
-                  <div class="col-md-8">
-                    <span class="val">${allData.natureofrights.ShareType}</span>
-                  </div>
-                </div>`
-              );
-            }
-
-            // if(allData.natureofrights && allData.natureofrights.ShareType){
-            //   $('#n_right_ref_point_id').html(`
-            //     <div class="row">
-            //       <div class="col-md-4">
-            //         <span class="attr">Reference Point(GM Point)</span>
-            //       </div>
-            //       <div class="col-md-8">
-            //         <span class="val">${allData.natureofrights.ShareType}</span>
-            //       </div>
-            //     </div>`
-            //   );
-            // }
-    
           },
-          error:function(error) {
+          error: function (error) {
             alert("Error Occurred Please try again.")
           }
         })
@@ -1248,7 +520,7 @@ $.ajax({
         toolbar.addClass('go-right-toolbar');
 
         $('.ol-overlaycontainer-stopevent').addClass('go-right');
-        
+
       };
     });
 
@@ -1282,7 +554,7 @@ $.ajax({
         }*/
 
     // Even is fired after the feature is added to the map
-    draw_source.on('addfeature', function(event) {
+    draw_source.on('addfeature', function (event) {
       drawn_feature = event.feature;
       console.log(drawn_feature);
       console.log("Drawing Finished!")
@@ -1298,14 +570,14 @@ $.ajax({
     });
 
     // Event is fired after the features changed
-    draw_source.on('changefeature', function(event) {
+    draw_source.on('changefeature', function (event) {
       updated_feature = event.feature;
       console.log(updated_feature);
     })
 
     $('.ol-zoom-in, .ol-zoom-out').attr('data-toggle', "tooltip") // setting attributes to the Ol default buttons using jQuery
 
-    $(function() { // activating tooltip for every element containing 'data-toggle="tooltip"'
+    $(function () { // activating tooltip for every element containing 'data-toggle="tooltip"'
       $('[data-toggle="tooltip"]').tooltip()
     })
   }
@@ -1342,7 +614,7 @@ function save_features_db() {
        name_of_geom: name, // new variables for passing data*/
       string_of_geom: geom // new variables for passing data
     },
-    success: function() {
+    success: function () {
       alert("Feature added successfully!");
       console.log("Feature added successfully!");
     }
@@ -1392,7 +664,7 @@ function update_features_db() {
         string_of_geom: geom, // new variables for passing data
         id_of_feature: g_id, // new variables for passing data
       },
-      success: function() {
+      success: function () {
         alert("Feature Updated successfully!");
         console.log("Feature Updated successfully!");
       }
@@ -1404,7 +676,7 @@ function update_features_db() {
 }
 
 /* UI jquery */
-$(document).ready(function() {
+$(document).ready(function () {
 
   /* Map Section Positioning */
   map_section.css({
@@ -1417,8 +689,8 @@ $(document).ready(function() {
   });
 
   /* Dashboard Expand Function */
-  $(".nav-link").each(function(index) {
-    $(this).on("click", function() {
+  $(".nav-link").each(function (index) {
+    $(this).on("click", function () {
 
       if (check_class) {
         sidebar_details_col.removeClass('hide');
@@ -1432,7 +704,7 @@ $(document).ready(function() {
   });
 
   /* Dashboard Close Function */
-  $(".btn-sidebar-det-close").click(function() {
+  $(".btn-sidebar-det-close").click(function () {
 
     sidebar_details_col.addClass('hide');
 
@@ -1446,7 +718,7 @@ $(document).ready(function() {
   });
 
   /* Add active class to the current button (highlight it) */
-  $(".nav-link").click(function() {
+  $(".nav-link").click(function () {
 
     for (var i = 0; i < btns.length; i++) {
       btns[i].classList.remove('active');
@@ -1457,8 +729,8 @@ $(document).ready(function() {
   });
 
   /* Parcel Click to Open Overview & Active Sidebar Overview */
-  $('.expand-btn').click(function() {
-    
+  $('.expand-btn').click(function () {
+
     overview_section.removeClass('hide-section');
     save_section.addClass('hide-section');
     share_section.addClass('hide-section');
@@ -1478,28 +750,28 @@ $(document).ready(function() {
   });
 
   /* To Be Removed */
-  $("#overview-btn").click(function() {
+  $("#overview-btn").click(function () {
     overview_section.removeClass('hide-section');
     save_section.addClass('hide-section');
     share_section.addClass('hide-section');
     bw_mc_section.addClass('hide-section');
   });
   /* To Be Removed */
-  $("#save-btn").click(function() {
+  $("#save-btn").click(function () {
     save_section.removeClass('hide-section');
     overview_section.addClass('hide-section');
     share_section.addClass('hide-section');
     bw_mc_section.addClass('hide-section');
   });
   /* To Be Removed */
-  $("#share-btn").click(function() {
+  $("#share-btn").click(function () {
     share_section.removeClass('hide-section');
     overview_section.addClass('hide-section');
     save_section.addClass('hide-section');
     bw_mc_section.addClass('hide-section');
   });
   /* To Be Removed */
-  $("#bw-mc-btn").click(function() {
+  $("#bw-mc-btn").click(function () {
     bw_mc_section.removeClass('hide-section');
     overview_section.addClass('hide-section');
     save_section.addClass('hide-section');

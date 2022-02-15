@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db = 'info_bhoomy';
+$db = 'info_bhoomi_new';
 $user = 'postgres';
 $pass = '111111';
 $port = '5432';

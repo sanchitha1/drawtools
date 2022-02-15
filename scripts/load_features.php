@@ -2,7 +2,7 @@
 include "../includes/init.php"; // including data base connection
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { // checking the server request methord, if that successful then below execute
-    $sql = "SELECT *, ST_AsGeoJSON(geom) AS geojson FROM parcels";
+    $sql = "SELECT *, ST_AsGeoJSON(geom) AS geojson FROM allparcelsnew";
     // echo $sql;
 
     $query = $pdo->query($sql); // query executing
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // checking the server request metho
             'geometry' => json_decode($row['geojson'], true),
             'properties' => array
             ( 
-                'sl_level' => $row['sl_level'],
+                // 'sl_level' => $row['sl_level'],
                 'id' => $row['gid'],
             ),
         );
