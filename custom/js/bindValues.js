@@ -12,12 +12,12 @@ const bindValues = function (id, title, value) {
   }
 
 function bindAllValues(allData) {
-    if (allData.landinformation && allData.landinformation.photograph && allData.landinformation.photograph != '0') {
-        $('#land_photo').html(`
-        <div class="top-img-sec" >
-          <img src="${allData.landinformation.photograph}" class="w-100" alt="" />
-        </div>`)
-      }
+    // if (allData.landinformation && allData.landinformation.photograph && allData.landinformation.photograph != '0') {
+    //     $('#land_photo').html(`
+    //     <div class="top-img-sec" >
+    //       <img src="${allData.landinformation.photograph}" class="w-100" alt="" />
+    //     </div>`)
+    //   }
       if (allData.id) {
         $('#p_overview_p_id').html(`
           <div class="row">
