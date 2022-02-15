@@ -729,6 +729,20 @@ $(document).ready(function () {
 
   });
 
+  $(".nav-link").hover(function () {
+
+    if (g_id) {
+      $(this).css({
+        'cursor':'pointer',
+      });
+    } else {
+      $(this).css({
+        'cursor':'not-allowed',
+      })
+    }
+  
+  });
+
   /* Parcel Click to Open Overview & Active Sidebar Overview */
   // $('.expand-btn').click(function () {
 
