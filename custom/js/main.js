@@ -504,6 +504,7 @@ $.ajax({
         overview_section.removeClass('hide-section');
         save_section.addClass('hide-section');
         share_section.addClass('hide-section');
+        bw_mc_section.addClass('hide-section');
 
         if (check_class) {
           sidebar_details_col.removeClass('hide');
@@ -714,7 +715,6 @@ $(document).ready(function () {
 
     toolbar.removeClass('go-right-toolbar');
     $('.ol-overlaycontainer-stopevent').removeClass('go-right');
-    g_id = undefined;
   });
 
   /* Add active class to the current button (highlight it) */
@@ -766,6 +766,11 @@ $(document).ready(function () {
 
   $("#overview-btn").click(function () {
     if (g_id) {
+      if (check_class) {
+        sidebar_details_col.removeClass('hide');
+      } else {
+        return;
+      }
       overview_section.removeClass('hide-section');
       save_section.addClass('hide-section');
       share_section.addClass('hide-section');
@@ -774,6 +779,11 @@ $(document).ready(function () {
   });
   $("#save-btn").click(function () {
     if (g_id) {
+      if (check_class) {
+        sidebar_details_col.removeClass('hide');
+      } else {
+        return;
+      }
       save_section.removeClass('hide-section');
       overview_section.addClass('hide-section');
       share_section.addClass('hide-section');
@@ -782,6 +792,11 @@ $(document).ready(function () {
   });
   $("#share-btn").click(function () {
     if (g_id) {
+      if (check_class) {
+        sidebar_details_col.removeClass('hide');
+      } else {
+        return;
+      }
       share_section.removeClass('hide-section');
       overview_section.addClass('hide-section');
       save_section.addClass('hide-section');
@@ -790,6 +805,11 @@ $(document).ready(function () {
   });
   $("#bw-mc-btn").click(function () {
     if (g_id) {
+      if (check_class) {
+        sidebar_details_col.removeClass('hide');
+      } else {
+        return;
+      }
       bw_mc_section.removeClass('hide-section');
       overview_section.addClass('hide-section');
       save_section.addClass('hide-section');
