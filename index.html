@@ -247,7 +247,7 @@
             <a href=""> Badulla</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            <a href="">Nes Perce</a>
+            <a href="">Bandarawela</a>
           </li>
         </ol>
       </nav>
@@ -1595,7 +1595,98 @@
                   </div>
                 </div>
               </div>
-            </div>        
+            </div>   
+            <!-- Search-parcels -->
+            <div class="accordion accordion-flush" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                    <h3 class="dashboard-h3">Assessment Analysis</h3>
+                  </button>
+                </h2>
+                <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="searchbtn-are">
+                      <div class="land-valuation dashboard-details-sec">
+                        <ul class="overview-ul">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Land Valuation
+                          </h4>
+                          <li>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" onchange="ChangeCheckBoxSelection()" id="LessThan100000" name="valuation">
+                              <label class="form-check-label" for="exampleCheck1">Less than Rs.100,000</label>
+                              </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" id="LessThan1Million" name="valuation"  onchange="ChangeCheckBoxSelection()">
+                              <label class="form-check-label" for="exampleCheck1">Less than 1 Million </label>
+                              </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" id="LessThan10Million" name="valuation"  onchange="ChangeCheckBoxSelection()">
+                              <label class="form-check-label" for="exampleCheck1">Less than 10 Million </label>
+                              </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" id="Over10Million"  name="valuation"  onchange="ChangeCheckBoxSelection()">
+                              <label class="form-check-label" for="exampleCheck1">Over 10 Million </label>
+                              </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="assessment dashboard-details-sec">
+                        <ul class="overview-ul">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Assessment
+                          </h4>
+                          <li>
+                            <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="AssesmentNotPaid"  onchange="ChangeCheckBoxSelection()">
+                              <label class="form-check-label" for="exampleCheck1">Assessment Paid </label>
+                              </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="area dashboard-details-sec">
+                        <ul class="overview-ul">
+                          <h4 class="dashboard-h4">
+                            <i class="fas fa-star-of-life"></i>Area
+                          </h4>
+                          <li>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" id="AreaLessThan10Perch" name="area"  onchange="ChangeCheckBoxSelection()">
+                              <label class="form-check-label" for="exampleCheck1">Less than 10 Perch </label>
+                              </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" id="AreaLessThan1Acre" name="area" onchange="ChangeCheckBoxSelection()">
+                              <label class="form-check-label" for="exampleCheck1">Less than 1 Acre </label>
+                              </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" id="Over1Acre" name="area" onchange="ChangeCheckBoxSelection()">
+                              <label class="form-check-label" for="exampleCheck1">Over 1 Acre </label>
+                              </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- <div class="prcl-sec-search-btn-sec"> -->
+                        <!-- Button trigger modal -->
+                        <!-- <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#prcl-sec-search-modal">
+                          Search
+                        </button>               -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>     
             <div class="prcl-sec-download-btn-sec">
               <!-- Button trigger modal -->
               <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#prcl-sec-download-modal">
