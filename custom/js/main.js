@@ -1,4 +1,9 @@
 // All global variables
+var features_analysis;
+var vectorLayer2;
+var vectorSource2;
+var load_selected_features;
+var map;
 var button_polygon;
 var button_edit;
 var button_delete;
@@ -377,6 +382,17 @@ $.ajax({
           title: 'Draw Layer',
           source: draw_source
         }),
+        new ol.layer.Heatmap({
+          title: 'Dengue Heatmap',
+          visible: false,
+          source: new ol.source.Vector({
+            url: 'data/kml/bwelashp.kml',
+            format: new ol.format.KML({
+              extractStyles: false,
+            }),
+        }),
+      }),
+        
         /*new ol.layer.Group({
           // A layer must have a title to appear in the layerswitcher
           title: 'Census',
@@ -421,7 +437,7 @@ $.ajax({
     }).extend([new polygon_button(), new editing_button(), new deleting_button(), new point_button(), new line_button()]);
 
     // Map
-    var map = new ol.Map({
+    map = new ol.Map({
       target: 'mymap',
       layers: layer_array,
       view: myview,
@@ -763,3 +779,150 @@ $(document).ready(function() {
   /* end: Dashboard Content Change Dummy */
 
 });
+
+/* start: Parcel Valuation Search Function */
+function ChangeCheckBoxSelection()
+{
+
+
+  // vectorLayer2.getSource().removeFeature(load_selected_features)
+
+  // vectorLayer2.getSource().clear();
+  // map.removeLayer(vectorLayer2);
+  // get selected items from check list.
+
+ // vectorSource2.clear();
+
+
+  //valuation
+  var valuation_100000 = document.getElementById("LessThan100000").checked;
+  var valuation_1mil = document.getElementById("LessThan1Million").checked;
+  var valuation_10mil = document.getElementById("LessThan10Million").checked;
+  var valuation_over10mil = document.getElementById("Over10Million").checked;
+
+  var valuemax;
+  var valuemin;
+
+      if(valuation_100000==true)
+      {
+        valuemin = 0;
+        valuemax = 100000;
+      }
+      else if(valuation_1mil==true)
+      {
+        valuemin = 100000;
+        valuemax = 1000000;
+      }
+      else if(valuation_10mil==true)
+      {
+        valuemin = 1000000;
+        valuemax = 10000000;
+      }
+      else if(valuation_over10mil==true)
+      {
+        valuemin = 10000000;
+        valuemax = 100000000000000000000;
+      }
+      else
+      {
+        valuemin = 0;
+        valuemax = 100000000000000000000;
+      }
+
+  //assesment
+  var assessment = document.getElementById("AssesmentNotPaid").checked;
+ 
+  //area
+  var area_10perch = document.getElementById("AreaLessThan10Perch").checked;
+  var area_1acre = document.getElementById("AreaLessThan1Acre").checked;
+  var area_over1acre = document.getElementById("Over1Acre").checked;
+
+      var areamax;
+      var areamin;
+
+      if(area_10perch==true)
+      {
+        areamin = 0;
+        areamax = 250;
+
+      }
+      else if(area_1acre==true)
+      {
+        areamin = 250;
+        areamax = 4000;
+      }
+       else if(area_over1acre==true)
+      {
+        areamin = 4000;
+        areamax = 100000000000000000;
+      }
+      else
+      {
+        areamin = 0;
+        areamax = 100000000000000000;
+
+      }
+  
+  // sql
+  // select vavluation,assessment,area from table where valuation between and assessment = true  and area between ....
+
+  var style2 = new ol.style.Style({
+     fill: new ol.style.Fill({
+          color: '#0000ff',
+          // var color = feature.get('access'),
+          weight: 1
+        }),
+     stroke: new ol.style.Stroke({
+          color: '#000000',
+          width: 1
+     })
+  });
+
+  $.ajax({
+       type:"POST",
+        data:{areamin:areamin,areamax:areamax,valuemin:valuemin,valuemax:valuemax,assessment:assessment},
+          dataType:"json",
+      url: "scripts/load_features_selected.php",
+     success:function(data,status) 
+      {
+        console.log(data);
+        console.log(status);
+        // console.log(data.status);
+
+         if(status==="success") 
+         { 
+         console.log("success");
+          load_selected_features = new ol.format.GeoJSON().readFeatures(data); // reading returned data from the ajax request
+        //  console.log(load_features); // for debugging 
+        //   vectorSource2 = new ol.source.Vector({features: new ol.format.GeoJSON().readFeatures(data),});
+         vectorSource2 = new ol.source.Vector({
+              features: load_selected_features
+            });
+            console.log(load_selected_features); // for debugging 
+             vectorLayer2 = new ol.layer.Vector({
+              source: vectorSource2,
+            //    background: '#000000',
+              style: style2,
+              // format: new ol.format.GeoJSON(),
+            });
+            map.addLayer(vectorLayer2);
+            vectorLayer2.setZIndex(10);
+         }
+        else
+        {
+          console.log("failed");
+        }
+      },
+      error: function()
+      {
+      console.log("error functon");
+      }
+    });
+    
+  features_analysis = vectorLayer2.getSource().getFeatures();
+  features_analysis.forEach((feature) => {
+      vectorLayer2.getSource().removeFeature(feature);
+  });
+}
+
+/* end: Parcel Valuation Search Function */
